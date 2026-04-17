@@ -17,6 +17,10 @@ jobs:
         uses: hacs/action@main
         with:
           category: integration
+          # 'brands' fails until we submit an icon PR to home-assistant/brands
+          # and it's merged. Skip the check until then so the rest of the
+          # pipeline is gating; re-enable once brands is live.
+          ignore: brands
 
   hassfest:
     name: Hassfest
