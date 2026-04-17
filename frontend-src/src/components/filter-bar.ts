@@ -27,16 +27,30 @@ export class BeeFilterBar extends LitElement {
   }
 
   render() {
+    const hasSearch = this.filters.search.length > 0;
     return html`
       <div class="bar">
-        <input
-          type="search"
-          placeholder="Search name or entity_id"
-          .value=${this.filters.search}
-          @input=${(e: Event) =>
-            this._emit({ search: (e.target as HTMLInputElement).value })}
-          class="search"
-        />
+        <div class="search-wrap">
+          <input
+            type="search"
+            placeholder="Search name or entity_id"
+            .value=${this.filters.search}
+            @input=${(e: Event) =>
+              this._emit({ search: (e.target as HTMLInputElement).value })}
+            class="search"
+          />
+          ${hasSearch
+            ? html`<button
+                type="button"
+                class="search-clear"
+                aria-label="Clear search"
+                title="Clear search"
+                @click=${() => this._emit({ search: "" })}
+              >
+                ×
+              </button>`
+            : ""}
+        </div>
 
         <select
           .value=${this.filters.domain}
@@ -103,9 +117,42 @@ export class BeeFilterBar extends LitElement {
       border-radius: 12px 12px 0 0;
       border-bottom: 1px solid var(--divider-color, #e0e0e0);
     }
-    .search {
+    .search-wrap {
+      position: relative;
       flex: 1 1 240px;
       min-width: 200px;
+      display: flex;
+    }
+    .search {
+      flex: 1 1 auto;
+      padding-right: 32px;
+    }
+    .search::-webkit-search-cancel-button,
+    .search::-webkit-search-decoration {
+      appearance: none;
+    }
+    .search-clear {
+      position: absolute;
+      right: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 0;
+      background: var(--secondary-background-color, #f0f0f0);
+      color: var(--secondary-text-color, #727272);
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 1;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .search-clear:hover {
+      background: var(--divider-color, #d0d0d0);
+      color: var(--primary-text-color, #212121);
     }
     input,
     select,

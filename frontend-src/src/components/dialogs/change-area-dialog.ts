@@ -1,6 +1,7 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import "../modal.js";
+import "../bee-select.js";
 import type { HassArea } from "../../types.js";
 
 @customElement("bee-change-area-dialog")
@@ -49,17 +50,20 @@ export class BeeChangeAreaDialog extends LitElement {
 
         <label>
           <span>New area</span>
-          <select
+          <bee-select
             .value=${this._selectedAreaId}
-            @change=${(e: Event) =>
-              (this._selectedAreaId = (e.target as HTMLSelectElement).value)}
+            .options=${[
+              { value: "", label: "— No area —" },
+              ...this.areas.map((a) => ({
+                value: a.area_id,
+                label: a.name,
+              })),
+            ]}
+            placeholder="Choose an area"
             ?disabled=${this.running}
-          >
-            <option value="">— No area —</option>
-            ${this.areas.map(
-              (a) => html`<option value=${a.area_id}>${a.name}</option>`,
-            )}
-          </select>
+            @select-change=${(e: CustomEvent<string>) =>
+              (this._selectedAreaId = e.detail)}
+          ></bee-select>
         </label>
 
         <p class="note">
@@ -99,14 +103,6 @@ export class BeeChangeAreaDialog extends LitElement {
     label span {
       font-size: 13px;
       color: var(--secondary-text-color, #727272);
-    }
-    select {
-      font: inherit;
-      padding: 8px 10px;
-      border-radius: 6px;
-      border: 1px solid var(--divider-color, #d0d0d0);
-      background: var(--primary-background-color, #fff);
-      color: var(--primary-text-color, #212121);
     }
     .note {
       margin: 12px 0 0;

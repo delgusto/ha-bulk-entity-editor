@@ -2,6 +2,7 @@ import { LitElement, html, css, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import "@lit-labs/virtualizer";
 import "../modal.js";
+import "../bee-select.js";
 import type { HassEntityRegistryEntry } from "../../types.js";
 import {
   buildRenameRows,
@@ -92,31 +93,31 @@ export class BeeRenameDialog extends LitElement {
           <div class="row">
             <label class="field">
               <span>Target</span>
-              <select
+              <bee-select
                 .value=${this._target}
-                @change=${(e: Event) =>
-                  (this._target = (e.target as HTMLSelectElement)
-                    .value as RenameTarget)}
+                .options=${[
+                  { value: "friendly_name", label: "Friendly name" },
+                  { value: "entity_id", label: "Entity ID" },
+                ]}
                 ?disabled=${this.running}
-              >
-                <option value="friendly_name">Friendly name</option>
-                <option value="entity_id">Entity ID</option>
-              </select>
+                @select-change=${(e: CustomEvent<string>) =>
+                  (this._target = e.detail as RenameTarget)}
+              ></bee-select>
             </label>
 
             <label class="field">
               <span>Mode</span>
-              <select
+              <bee-select
                 .value=${this._mode}
-                @change=${(e: Event) =>
-                  (this._mode = (e.target as HTMLSelectElement)
-                    .value as RenameMode)}
+                .options=${[
+                  { value: "prefix", label: "Add prefix" },
+                  { value: "suffix", label: "Add suffix" },
+                  { value: "find-replace", label: "Find & replace" },
+                ]}
                 ?disabled=${this.running}
-              >
-                <option value="prefix">Add prefix</option>
-                <option value="suffix">Add suffix</option>
-                <option value="find-replace">Find &amp; replace</option>
-              </select>
+                @select-change=${(e: CustomEvent<string>) =>
+                  (this._mode = e.detail as RenameMode)}
+              ></bee-select>
             </label>
           </div>
 
@@ -291,8 +292,7 @@ export class BeeRenameDialog extends LitElement {
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }
-    input[type="text"],
-    select {
+    input[type="text"] {
       font: inherit;
       padding: 8px 10px;
       border-radius: 6px;
@@ -300,8 +300,7 @@ export class BeeRenameDialog extends LitElement {
       background: var(--primary-background-color, #fff);
       color: var(--primary-text-color, #212121);
     }
-    input[type="text"]:focus,
-    select:focus {
+    input[type="text"]:focus {
       outline: 2px solid var(--primary-color, #03a9f4);
       outline-offset: -1px;
     }
