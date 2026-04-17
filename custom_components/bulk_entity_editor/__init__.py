@@ -53,6 +53,12 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         )
         domain_data[_STATIC_REGISTERED_KEY] = True
 
+    # Cache-bust the module URL with the bundle's mtime so browsers (and
+    # WKWebView in the macOS/iOS companion app, which is particularly sticky)
+    # always fetch a fresh copy after a rebuild.
+    bundle_version = int(panel_file.stat().st_mtime)
+    versioned_js_url = f"{PANEL_JS_URL}?v={bundle_version}"
+
     async_register_built_in_panel(
         hass,
         component_name="custom",
@@ -66,7 +72,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                 "trust_external": False,
                 # The Vite bundle is an ES module (uses `export`). We must
                 # load it via module_url so the browser treats it as one.
-                "module_url": PANEL_JS_URL,
+                "module_url": versioned_js_url,
             }
         },
         require_admin=True,
