@@ -1,0 +1,58 @@
+name: Bug report
+description: Something in the Bulk Editor panel isn't working
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug. The more specific you can be, the faster this gets fixed.
+  - type: input
+    id: ha-version
+    attributes:
+      label: Home Assistant version
+      description: Settings → About
+      placeholder: "e.g. 2025.1.0"
+    validations:
+      required: true
+  - type: input
+    id: integration-version
+    attributes:
+      label: Bulk Entity Editor version
+      description: Settings → Devices & Services → Bulk Entity Editor
+      placeholder: "e.g. 0.1.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: install-method
+    attributes:
+      label: How did you install?
+      options:
+        - HACS (default store)
+        - HACS (custom repository)
+        - Manual (copied files)
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: console-log
+    attributes:
+      label: Browser console output
+      description: Open DevTools → Console, reproduce the bug, paste anything red or unusual.
+      render: shell
+  - type: textarea
+    id: ha-log
+    attributes:
+      label: Home Assistant log
+      description: Settings → System → Logs. Paste any line mentioning `bulk_entity_editor`.
+      render: shell
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If the bug is visual, screenshots help a lot.
