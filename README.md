@@ -6,8 +6,7 @@
 
 A Home Assistant custom integration that adds a **Bulk Editor** panel to your sidebar for multi-selecting entities and applying changes in one action — instead of clicking into each entity one at a time.
 
-<!-- Replace with a real screenshot before first release -->
-<!-- ![Main panel screenshot](docs/screenshots/panel.png) -->
+![Main panel](docs/screenshots/panel.png)
 
 ## Features
 
@@ -43,6 +42,12 @@ A Home Assistant custom integration that adds a **Bulk Editor** panel to your si
 1. Copy `custom_components/bulk_entity_editor/` into your HA config's `custom_components/` folder. The `frontend/bulk-entity-editor.js` bundle ships in the repo — you don't need to build it.
 2. Restart Home Assistant.
 3. Settings → Devices & Services → **Add Integration** → "Bulk Entity Editor".
+
+## Screenshots
+
+| Change area | Rename with preview |
+|---|---|
+| ![Change area dialog](docs/screenshots/change-area.png) | ![Rename dialog with preview](docs/screenshots/rename.png) |
 
 ## Usage
 
