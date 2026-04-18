@@ -320,12 +320,20 @@ export class BulkEntityEditorPanel extends LitElement {
     return html`
       <div class="page">
         <header>
-          <h1>Bulk Entity Editor</h1>
-          <p class="subtitle">
-            ${this._loading
-              ? "Loading…"
-              : `${visible.length} of ${this._entities.length} entities`}
-          </p>
+          <div class="header-row">
+            <ha-menu-button
+              .hass=${this.hass}
+              .narrow=${this.narrow}
+            ></ha-menu-button>
+            <div class="title-block">
+              <h1>Bulk Entity Editor</h1>
+              <p class="subtitle">
+                ${this._loading
+                  ? "Loading…"
+                  : `${visible.length} of ${this._entities.length} entities`}
+              </p>
+            </div>
+          </div>
         </header>
 
         ${this._error
@@ -433,6 +441,19 @@ export class BulkEntityEditorPanel extends LitElement {
     header {
       margin-bottom: 16px;
     }
+    .header-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    ha-menu-button {
+      flex: 0 0 auto;
+      color: var(--primary-text-color, #212121);
+    }
+    .title-block {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
     h1 {
       font-size: 24px;
       font-weight: 500;
@@ -442,6 +463,17 @@ export class BulkEntityEditorPanel extends LitElement {
       margin: 4px 0 0;
       color: var(--secondary-text-color, #727272);
       font-size: 14px;
+    }
+    @media (max-width: 700px) {
+      .page {
+        padding: 12px;
+      }
+      h1 {
+        font-size: 18px;
+      }
+      .subtitle {
+        font-size: 12px;
+      }
     }
     .error {
       padding: 12px 16px;

@@ -87,9 +87,9 @@ export class BeeEntityTable extends LitElement {
             />
           </div>
           <div class="cell">Name</div>
-          <div class="cell">Entity ID</div>
+          <div class="cell hide-on-narrow">Entity ID</div>
           <div class="cell">Area</div>
-          <div class="cell">Integration</div>
+          <div class="cell hide-on-narrow">Integration</div>
           <div class="cell">State</div>
         </div>
         <lit-virtualizer
@@ -124,10 +124,13 @@ export class BeeEntityTable extends LitElement {
                     aria-label=${`Select ${e.entity_id}`}
                   />
                 </div>
-                <div class="cell">${this._displayName(e)}</div>
-                <div class="cell mono">${e.entity_id}</div>
+                <div class="cell">
+                  <div class="primary-name">${this._displayName(e)}</div>
+                  <div class="secondary-id">${e.entity_id}</div>
+                </div>
+                <div class="cell mono hide-on-narrow">${e.entity_id}</div>
                 <div class="cell">${this._areaName(effectiveArea)}</div>
-                <div class="cell">${e.platform}</div>
+                <div class="cell hide-on-narrow">${e.platform}</div>
                 <div class="cell">
                   <span class="state-pill ${stateClass}">${stateLabel}</span>
                 </div>
@@ -232,6 +235,38 @@ export class BeeEntityTable extends LitElement {
       background: var(--secondary-background-color, #ececec);
       color: var(--secondary-text-color, #727272);
       border: 1px dashed var(--divider-color, #c0c0c0);
+    }
+    .primary-name {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .secondary-id {
+      display: none;
+      font-family: var(--code-font-family, ui-monospace, monospace);
+      font-size: 11px;
+      color: var(--secondary-text-color, #727272);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 2px;
+    }
+    @media (max-width: 700px) {
+      .hide-on-narrow {
+        display: none !important;
+      }
+      .row {
+        grid-template-columns: 44px minmax(120px, 2fr) minmax(80px, 1fr) 80px;
+      }
+      .secondary-id {
+        display: block;
+      }
+      .cell {
+        padding: 8px 10px;
+      }
+      .cell-check {
+        padding: 8px 0 8px 12px;
+      }
     }
     .cell {
       padding: 10px 12px;

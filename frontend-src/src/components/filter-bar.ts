@@ -1,12 +1,14 @@
-import { LitElement, html, css } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { LitElement, html, css, nothing } from "lit";
+import { customElement, property, state } from "lit/decorators.js";
 import "./bee-select.js";
+import "./modal.js";
 import type { HassArea } from "../types.js";
 import type {
   ActivityFilter,
   FilterState,
   StateFilter,
 } from "../lib/filters.js";
+import { DEFAULT_FILTER_STATE } from "../lib/filters.js";
 
 @customElement("bee-filter-bar")
 export class BeeFilterBar extends LitElement {
@@ -14,6 +16,8 @@ export class BeeFilterBar extends LitElement {
   @property({ attribute: false }) domains: string[] = [];
   @property({ attribute: false }) integrations: string[] = [];
   @property({ attribute: false }) areas: HassArea[] = [];
+
+  @state() private _modalOpen = false;
 
   private _emit(patch: Partial<FilterState>) {
     this.dispatchEvent(
@@ -31,8 +35,18 @@ export class BeeFilterBar extends LitElement {
     );
   }
 
-  render() {
-    const hasSearch = this.filters.search.length > 0;
+  private _activeFilterCount(): number {
+    let count = 0;
+    if (this.filters.domain !== DEFAULT_FILTER_STATE.domain) count += 1;
+    if (this.filters.areaId !== DEFAULT_FILTER_STATE.areaId) count += 1;
+    if (this.filters.integration !== DEFAULT_FILTER_STATE.integration)
+      count += 1;
+    if (this.filters.state !== DEFAULT_FILTER_STATE.state) count += 1;
+    if (this.filters.activity !== DEFAULT_FILTER_STATE.activity) count += 1;
+    return count;
+  }
+
+  private _renderDropdowns() {
     const areaOptions = [
       { value: "", label: "All areas" },
       { value: "__none__", label: "— No area —" },
@@ -46,6 +60,51 @@ export class BeeFilterBar extends LitElement {
       { value: "", label: "All integrations" },
       ...this.integrations.map((i) => ({ value: i, label: i })),
     ];
+    return html`
+      <bee-select
+        .value=${this.filters.domain}
+        .options=${domainOptions}
+        @select-change=${(e: CustomEvent<string>) =>
+          this._emit({ domain: e.detail })}
+      ></bee-select>
+      <bee-select
+        .value=${this.filters.areaId}
+        .options=${areaOptions}
+        @select-change=${(e: CustomEvent<string>) =>
+          this._emit({ areaId: e.detail })}
+      ></bee-select>
+      <bee-select
+        .value=${this.filters.integration}
+        .options=${integrationOptions}
+        @select-change=${(e: CustomEvent<string>) =>
+          this._emit({ integration: e.detail })}
+      ></bee-select>
+      <bee-select
+        .value=${this.filters.state}
+        .options=${[
+          { value: "all", label: "All states" },
+          { value: "active", label: "Active only" },
+          { value: "disabled", label: "Disabled only" },
+          { value: "hidden", label: "Hidden only" },
+        ]}
+        @select-change=${(e: CustomEvent<string>) =>
+          this._emit({ state: e.detail as StateFilter })}
+      ></bee-select>
+      <bee-select
+        .value=${this.filters.activity}
+        .options=${[
+          { value: "any", label: "Any activity" },
+          { value: "never_received", label: "Never received data" },
+        ]}
+        @select-change=${(e: CustomEvent<string>) =>
+          this._emit({ activity: e.detail as ActivityFilter })}
+      ></bee-select>
+    `;
+  }
+
+  render() {
+    const hasSearch = this.filters.search.length > 0;
+    const activeCount = this._activeFilterCount();
     return html`
       <div class="bar">
         <div class="search-wrap">
@@ -67,64 +126,54 @@ export class BeeFilterBar extends LitElement {
               >
                 ×
               </button>`
-            : ""}
+            : nothing}
         </div>
 
-        <div class="select-slot">
-          <bee-select
-            .value=${this.filters.domain}
-            .options=${domainOptions}
-            @select-change=${(e: CustomEvent<string>) =>
-              this._emit({ domain: e.detail })}
-          ></bee-select>
+        <div class="inline-filters">
+          ${this._renderDropdowns()}
         </div>
 
-        <div class="select-slot">
-          <bee-select
-            .value=${this.filters.areaId}
-            .options=${areaOptions}
-            @select-change=${(e: CustomEvent<string>) =>
-              this._emit({ areaId: e.detail })}
-          ></bee-select>
-        </div>
-
-        <div class="select-slot">
-          <bee-select
-            .value=${this.filters.integration}
-            .options=${integrationOptions}
-            @select-change=${(e: CustomEvent<string>) =>
-              this._emit({ integration: e.detail })}
-          ></bee-select>
-        </div>
-
-        <div class="select-slot">
-          <bee-select
-            .value=${this.filters.state}
-            .options=${[
-              { value: "all", label: "All states" },
-              { value: "active", label: "Active only" },
-              { value: "disabled", label: "Disabled only" },
-              { value: "hidden", label: "Hidden only" },
-            ]}
-            @select-change=${(e: CustomEvent<string>) =>
-              this._emit({ state: e.detail as StateFilter })}
-          ></bee-select>
-        </div>
-
-        <div class="select-slot">
-          <bee-select
-            .value=${this.filters.activity}
-            .options=${[
-              { value: "any", label: "Any activity" },
-              { value: "never_received", label: "Never received data" },
-            ]}
-            @select-change=${(e: CustomEvent<string>) =>
-              this._emit({ activity: e.detail as ActivityFilter })}
-          ></bee-select>
-        </div>
+        <button
+          type="button"
+          class="filters-button"
+          @click=${() => (this._modalOpen = true)}
+        >
+          <svg class="funnel" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M3 5h18l-7 8v6l-4-2v-4L3 5z"/>
+          </svg>
+          Filters
+          ${activeCount > 0
+            ? html`<span class="badge">${activeCount}</span>`
+            : nothing}
+        </button>
 
         <button class="reset" @click=${this._reset}>Reset</button>
       </div>
+
+      <bee-modal
+        .open=${this._modalOpen}
+        heading="Filters"
+        @modal-close=${() => (this._modalOpen = false)}
+      >
+        <div class="stacked-filters">${this._renderDropdowns()}</div>
+        <div slot="footer">
+          <button
+            class="btn"
+            @click=${() => {
+              this._reset();
+              this._modalOpen = false;
+            }}
+          >
+            Reset
+          </button>
+          <button
+            class="btn primary"
+            @click=${() => (this._modalOpen = false)}
+          >
+            Done
+          </button>
+        </div>
+      </bee-modal>
     `;
   }
 
@@ -145,7 +194,7 @@ export class BeeFilterBar extends LitElement {
     .search-wrap {
       position: relative;
       flex: 1 1 240px;
-      min-width: 200px;
+      min-width: 160px;
       display: flex;
     }
     .search {
@@ -179,33 +228,85 @@ export class BeeFilterBar extends LitElement {
       background: var(--divider-color, #d0d0d0);
       color: var(--primary-text-color, #212121);
     }
-    .select-slot {
+    .inline-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      flex: 1 1 auto;
+    }
+    .inline-filters > bee-select {
       flex: 0 1 160px;
       min-width: 140px;
     }
-    input {
-      font: inherit;
-      padding: 8px 10px;
-      border-radius: 6px;
-      border: 1px solid var(--divider-color, #d0d0d0);
-      background: var(--primary-background-color, #fff);
-      color: var(--primary-text-color, #212121);
+    .filters-button {
+      display: none;
+      align-items: center;
+      gap: 6px;
     }
-    input:focus {
-      outline: 2px solid var(--primary-color, #03a9f4);
-      outline-offset: -1px;
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 6px;
+      border-radius: 10px;
+      background: var(--primary-color, #03a9f4);
+      color: var(--text-primary-color, #fff);
+      font-size: 12px;
+      font-weight: 600;
     }
-    .reset {
+    input,
+    .filters-button,
+    .reset,
+    .btn {
       font: inherit;
-      padding: 8px 10px;
+      padding: 8px 12px;
       border-radius: 6px;
       border: 1px solid var(--divider-color, #d0d0d0);
       background: var(--primary-background-color, #fff);
       color: var(--primary-text-color, #212121);
       cursor: pointer;
     }
-    .reset:hover {
+    input:focus {
+      outline: 2px solid var(--primary-color, #03a9f4);
+      outline-offset: -1px;
+      cursor: text;
+    }
+    input {
+      cursor: text;
+    }
+    .reset:hover,
+    .filters-button:hover,
+    .btn:hover {
       background: var(--secondary-background-color, #f5f5f5);
+    }
+    .btn.primary {
+      background: var(--primary-color, #03a9f4);
+      color: var(--text-primary-color, #fff);
+      border-color: transparent;
+    }
+    .btn.primary:hover {
+      filter: brightness(0.95);
+    }
+    .stacked-filters {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    @media (max-width: 700px) {
+      .bar {
+        padding: 10px 12px;
+      }
+      .inline-filters {
+        display: none;
+      }
+      .filters-button {
+        display: inline-flex;
+      }
+      .search-wrap {
+        flex: 1 1 100%;
+      }
     }
   `;
 }
