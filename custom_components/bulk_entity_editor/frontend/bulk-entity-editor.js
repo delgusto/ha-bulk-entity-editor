@@ -262,8 +262,8 @@ j.elementStyles = [], j.shadowRootOptions = { mode: "open" }, j[J("elementProper
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const X = globalThis, Le = (i) => i, fe = X.trustedTypes, Te = fe ? fe.createPolicy("lit-html", { createHTML: (i) => i }) : void 0, Qe = "$lit$", k = `lit$${Math.random().toFixed(9).slice(2)}$`, et = "?" + k, $t = `<${et}>`, T = document, te = () => T.createComment(""), ie = (i) => i === null || typeof i != "object" && typeof i != "function", ze = Array.isArray, xt = (i) => ze(i) || typeof i?.[Symbol.iterator] == "function", xe = `[ 	
-\f\r]`, Y = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, Ve = /-->/g, Ne = />/g, R = RegExp(`>|${xe}(?:([^\\s"'>=/]+)(${xe}*=${xe}*(?:[^ 	
+const X = globalThis, Le = (i) => i, fe = X.trustedTypes, Te = fe ? fe.createPolicy("lit-html", { createHTML: (i) => i }) : void 0, Qe = "$lit$", k = `lit$${Math.random().toFixed(9).slice(2)}$`, et = "?" + k, xt = `<${et}>`, T = document, te = () => T.createComment(""), ie = (i) => i === null || typeof i != "object" && typeof i != "function", ze = Array.isArray, $t = (i) => ze(i) || typeof i?.[Symbol.iterator] == "function", $e = `[ 	
+\f\r]`, Y = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, Ve = /-->/g, Ne = />/g, R = RegExp(`>|${$e}(?:([^\\s"'>=/]+)(${$e}*=${$e}*(?:[^ 	
 \f\r"'\`<>=]|("|')|))|$)`, "g"), Ue = /'/g, Be = /"/g, tt = /^(?:script|style|textarea|title)$/i, wt = (i) => (e, ...t) => ({ _$litType$: i, strings: e, values: t }), p = wt(1), M = Symbol.for("lit-noChange"), g = Symbol.for("lit-nothing"), je = /* @__PURE__ */ new WeakMap(), L = T.createTreeWalker(T, 129);
 function it(i, e) {
   if (!ze(i) || !i.hasOwnProperty("raw")) throw Error("invalid template strings array");
@@ -277,7 +277,7 @@ const St = (i, e) => {
     let h, d, c = -1, f = 0;
     for (; f < l.length && (n.lastIndex = f, d = n.exec(l), d !== null); ) f = n.lastIndex, n === Y ? d[1] === "!--" ? n = Ve : d[1] !== void 0 ? n = Ne : d[2] !== void 0 ? (tt.test(d[2]) && (r = RegExp("</" + d[2], "g")), n = R) : d[3] !== void 0 && (n = R) : n === R ? d[0] === ">" ? (n = r ?? Y, c = -1) : d[1] === void 0 ? c = -2 : (c = n.lastIndex - d[2].length, h = d[1], n = d[3] === void 0 ? R : d[3] === '"' ? Be : Ue) : n === Be || n === Ue ? n = R : n === Ve || n === Ne ? n = Y : (n = R, r = void 0);
     const _ = n === R && i[a + 1].startsWith("/>") ? " " : "";
-    o += n === Y ? l + $t : c >= 0 ? (s.push(h), l.slice(0, c) + Qe + l.slice(c) + k + _) : l + k + (c === -2 ? a : _);
+    o += n === Y ? l + xt : c >= 0 ? (s.push(h), l.slice(0, c) + Qe + l.slice(c) + k + _) : l + k + (c === -2 ? a : _);
   }
   return [it(i, o + (i[t] || "<?>") + (e === 2 ? "</svg>" : e === 3 ? "</math>" : "")), s];
 };
@@ -371,7 +371,7 @@ class F {
     return this._$AB;
   }
   _$AI(e, t = this) {
-    e = H(this, e, t), ie(e) ? e === g || e == null || e === "" ? (this._$AH !== g && this._$AR(), this._$AH = g) : e !== this._$AH && e !== M && this._(e) : e._$litType$ !== void 0 ? this.$(e) : e.nodeType !== void 0 ? this.T(e) : xt(e) ? this.k(e) : this._(e);
+    e = H(this, e, t), ie(e) ? e === g || e == null || e === "" ? (this._$AH !== g && this._$AR(), this._$AH = g) : e !== this._$AH && e !== M && this._(e) : e._$litType$ !== void 0 ? this.$(e) : e.nodeType !== void 0 ? this.T(e) : $t(e) ? this.k(e) : this._(e);
   }
   O(e) {
     return this._$AA.parentNode.insertBefore(e, this._$AB);
@@ -493,7 +493,7 @@ const It = (i, e, t) => {
  * SPDX-License-Identifier: BSD-3-Clause
  */
 const Q = globalThis;
-let $ = class extends j {
+let x = class extends j {
   constructor() {
     super(...arguments), this.renderOptions = { host: this }, this._$Do = void 0;
   }
@@ -516,9 +516,9 @@ let $ = class extends j {
     return M;
   }
 };
-$._$litElement$ = !0, $.finalized = !0, Q.litElementHydrateSupport?.({ LitElement: $ });
+x._$litElement$ = !0, x.finalized = !0, Q.litElementHydrateSupport?.({ LitElement: x });
 const Dt = Q.litElementPolyfillSupport;
-Dt?.({ LitElement: $ });
+Dt?.({ LitElement: x });
 (Q.litElementVersions ?? (Q.litElementVersions = [])).push("4.2.2");
 /**
  * @license
@@ -645,12 +645,203 @@ async function Bt({
   for (let d = 0; d < h; d++) a.push(l());
   return await Promise.all(a), o;
 }
-var jt = Object.defineProperty, Ht = Object.getOwnPropertyDescriptor, ne = (i, e, t, s) => {
+var jt = Object.defineProperty, Ht = Object.getOwnPropertyDescriptor, B = (i, e, t, s) => {
   for (var r = s > 1 ? void 0 : s ? Ht(e, t) : e, o = i.length - 1, n; o >= 0; o--)
     (n = i[o]) && (r = (s ? n(e, t, r) : n(r)) || r);
   return s && r && jt(e, t, r), r;
 };
-let V = class extends $ {
+let z = class extends x {
+  constructor() {
+    super(...arguments), this.options = [], this.value = "", this.placeholder = "", this.disabled = !1, this._open = !1, this._menuRect = null, this._onDocDown = (i) => {
+      i.composedPath().includes(this) || this._close();
+    }, this._onKey = (i) => {
+      i.key === "Escape" && this._open && (i.stopPropagation(), this._close());
+    }, this._toggle = (i) => {
+      i.stopPropagation(), !this.disabled && (this._open ? this._close() : this._openMenu());
+    }, this._close = () => {
+      this._open && (this._open = !1, this._menuRect = null, this._removeGlobalListeners());
+    };
+  }
+  disconnectedCallback() {
+    super.disconnectedCallback(), this._removeGlobalListeners();
+  }
+  _addGlobalListeners() {
+    document.addEventListener("mousedown", this._onDocDown, !0), document.addEventListener("keydown", this._onKey, !0), window.addEventListener("resize", this._close), window.addEventListener("scroll", this._close, !0);
+  }
+  _removeGlobalListeners() {
+    document.removeEventListener("mousedown", this._onDocDown, !0), document.removeEventListener("keydown", this._onKey, !0), window.removeEventListener("resize", this._close), window.removeEventListener("scroll", this._close, !0);
+  }
+  _openMenu() {
+    const i = this.renderRoot.querySelector(".trigger");
+    if (!i) return;
+    const e = i.getBoundingClientRect();
+    this._menuRect = {
+      top: e.bottom + 4,
+      left: e.left,
+      width: e.width
+    }, this._open = !0, queueMicrotask(() => this._addGlobalListeners());
+  }
+  _pick(i, e) {
+    e.stopPropagation(), this.value = i, this.dispatchEvent(
+      new CustomEvent("select-change", {
+        detail: i,
+        bubbles: !0,
+        composed: !0
+      })
+    ), this._close();
+  }
+  get _currentLabel() {
+    const i = this.options.find((e) => e.value === this.value);
+    return i ? i.label : this.placeholder;
+  }
+  render() {
+    return p`
+      <button
+        type="button"
+        class="trigger ${this._open ? "open" : ""}"
+        @click=${this._toggle}
+        ?disabled=${this.disabled}
+        aria-haspopup="listbox"
+        aria-expanded=${this._open}
+      >
+        <span class="label ${this.value ? "" : "placeholder"}">
+          ${this._currentLabel}
+        </span>
+        <span class="chev" aria-hidden="true">▾</span>
+      </button>
+      ${this._open && this._menuRect ? p`
+            <ul
+              class="menu"
+              role="listbox"
+              style=${`top:${this._menuRect.top}px;left:${this._menuRect.left}px;min-width:${this._menuRect.width}px;`}
+            >
+              ${this.options.map(
+      (i) => p`
+                  <li
+                    role="option"
+                    aria-selected=${i.value === this.value}
+                    class=${i.value === this.value ? "selected" : ""}
+                    @click=${(e) => this._pick(i.value, e)}
+                  >
+                    ${i.label}
+                  </li>
+                `
+    )}
+              ${this.options.length === 0 ? p`<li class="empty">No options</li>` : g}
+            </ul>
+          ` : g}
+    `;
+  }
+};
+z.styles = C`
+    :host {
+      display: inline-block;
+      position: relative;
+      width: 100%;
+    }
+    .trigger {
+      font: inherit;
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--divider-color, #d0d0d0);
+      background: var(--primary-background-color, #fff);
+      color: var(--primary-text-color, #212121);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      text-align: left;
+    }
+    .trigger:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .trigger:focus-visible,
+    .trigger.open {
+      outline: 2px solid var(--primary-color, #03a9f4);
+      outline-offset: -1px;
+    }
+    .label {
+      flex: 1 1 auto;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .placeholder {
+      color: var(--secondary-text-color, #727272);
+    }
+    .chev {
+      font-size: 12px;
+      color: var(--secondary-text-color, #727272);
+      flex: 0 0 auto;
+    }
+    .menu {
+      position: fixed;
+      z-index: 100;
+      margin: 0;
+      padding: 4px 0;
+      list-style: none;
+      background: var(--card-background-color, #fff);
+      color: var(--primary-text-color, #212121);
+      border: 1px solid var(--divider-color, #d0d0d0);
+      border-radius: 8px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+      max-height: 280px;
+      overflow: auto;
+    }
+    .menu li {
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+    .menu li:hover {
+      background: var(--secondary-background-color, #f0f0f0);
+    }
+    .menu li.selected {
+      background: color-mix(
+        in srgb,
+        var(--primary-color, #03a9f4) 12%,
+        transparent
+      );
+      font-weight: 500;
+    }
+    .menu li.empty {
+      color: var(--secondary-text-color, #727272);
+      cursor: default;
+      font-style: italic;
+    }
+  `;
+B([
+  u({ attribute: !1 })
+], z.prototype, "options", 2);
+B([
+  u({ type: String })
+], z.prototype, "value", 2);
+B([
+  u({ type: String })
+], z.prototype, "placeholder", 2);
+B([
+  u({ type: Boolean })
+], z.prototype, "disabled", 2);
+B([
+  m()
+], z.prototype, "_open", 2);
+B([
+  m()
+], z.prototype, "_menuRect", 2);
+z = B([
+  E("bee-select")
+], z);
+var Ft = Object.defineProperty, Wt = Object.getOwnPropertyDescriptor, ne = (i, e, t, s) => {
+  for (var r = s > 1 ? void 0 : s ? Wt(e, t) : e, o = i.length - 1, n; o >= 0; o--)
+    (n = i[o]) && (r = (s ? n(e, t, r) : n(r)) || r);
+  return s && r && Ft(e, t, r), r;
+};
+let V = class extends x {
   constructor() {
     super(...arguments), this.domains = [], this.integrations = [], this.areas = [];
   }
@@ -669,7 +860,17 @@ let V = class extends $ {
     );
   }
   render() {
-    const i = this.filters.search.length > 0;
+    const i = this.filters.search.length > 0, e = [
+      { value: "", label: "All areas" },
+      { value: "__none__", label: "— No area —" },
+      ...this.areas.map((r) => ({ value: r.area_id, label: r.name }))
+    ], t = [
+      { value: "", label: "All domains" },
+      ...this.domains.map((r) => ({ value: r, label: r }))
+    ], s = [
+      { value: "", label: "All integrations" },
+      ...this.integrations.map((r) => ({ value: r, label: r }))
+    ];
     return p`
       <div class="bar">
         <div class="search-wrap">
@@ -677,7 +878,7 @@ let V = class extends $ {
             type="search"
             placeholder="Search name or entity_id"
             .value=${this.filters.search}
-            @input=${(e) => this._emit({ search: e.target.value })}
+            @input=${(r) => this._emit({ search: r.target.value })}
             class="search"
           />
           ${i ? p`<button
@@ -691,58 +892,53 @@ let V = class extends $ {
               </button>` : ""}
         </div>
 
-        <select
-          .value=${this.filters.domain}
-          @change=${(e) => this._emit({ domain: e.target.value })}
-        >
-          <option value="">All domains</option>
-          ${this.domains.map(
-      (e) => p`<option value=${e}>${e}</option>`
-    )}
-        </select>
+        <div class="select-slot">
+          <bee-select
+            .value=${this.filters.domain}
+            .options=${t}
+            @select-change=${(r) => this._emit({ domain: r.detail })}
+          ></bee-select>
+        </div>
 
-        <select
-          .value=${this.filters.areaId}
-          @change=${(e) => this._emit({ areaId: e.target.value })}
-        >
-          <option value="">All areas</option>
-          <option value="__none__">— No area —</option>
-          ${this.areas.map(
-      (e) => p`<option value=${e.area_id}>${e.name}</option>`
-    )}
-        </select>
+        <div class="select-slot">
+          <bee-select
+            .value=${this.filters.areaId}
+            .options=${e}
+            @select-change=${(r) => this._emit({ areaId: r.detail })}
+          ></bee-select>
+        </div>
 
-        <select
-          .value=${this.filters.integration}
-          @change=${(e) => this._emit({ integration: e.target.value })}
-        >
-          <option value="">All integrations</option>
-          ${this.integrations.map(
-      (e) => p`<option value=${e}>${e}</option>`
-    )}
-        </select>
+        <div class="select-slot">
+          <bee-select
+            .value=${this.filters.integration}
+            .options=${s}
+            @select-change=${(r) => this._emit({ integration: r.detail })}
+          ></bee-select>
+        </div>
 
-        <select
-          .value=${this.filters.state}
-          @change=${(e) => this._emit({
-      state: e.target.value
-    })}
-        >
-          <option value="all">All states</option>
-          <option value="active">Active only</option>
-          <option value="disabled">Disabled only</option>
-          <option value="hidden">Hidden only</option>
-        </select>
+        <div class="select-slot">
+          <bee-select
+            .value=${this.filters.state}
+            .options=${[
+      { value: "all", label: "All states" },
+      { value: "active", label: "Active only" },
+      { value: "disabled", label: "Disabled only" },
+      { value: "hidden", label: "Hidden only" }
+    ]}
+            @select-change=${(r) => this._emit({ state: r.detail })}
+          ></bee-select>
+        </div>
 
-        <select
-          .value=${this.filters.activity}
-          @change=${(e) => this._emit({
-      activity: e.target.value
-    })}
-        >
-          <option value="any">Any activity</option>
-          <option value="never_received">Never received data</option>
-        </select>
+        <div class="select-slot">
+          <bee-select
+            .value=${this.filters.activity}
+            .options=${[
+      { value: "any", label: "Any activity" },
+      { value: "never_received", label: "Never received data" }
+    ]}
+            @select-change=${(r) => this._emit({ activity: r.detail })}
+          ></bee-select>
+        </div>
 
         <button class="reset" @click=${this._reset}>Reset</button>
       </div>
@@ -761,6 +957,7 @@ V.styles = C`
       background: var(--card-background-color, #fff);
       border-radius: 12px 12px 0 0;
       border-bottom: 1px solid var(--divider-color, #e0e0e0);
+      align-items: center;
     }
     .search-wrap {
       position: relative;
@@ -799,9 +996,11 @@ V.styles = C`
       background: var(--divider-color, #d0d0d0);
       color: var(--primary-text-color, #212121);
     }
-    input,
-    select,
-    button {
+    .select-slot {
+      flex: 0 1 160px;
+      min-width: 140px;
+    }
+    input {
       font: inherit;
       padding: 8px 10px;
       border-radius: 6px;
@@ -809,12 +1008,17 @@ V.styles = C`
       background: var(--primary-background-color, #fff);
       color: var(--primary-text-color, #212121);
     }
-    input:focus,
-    select:focus {
+    input:focus {
       outline: 2px solid var(--primary-color, #03a9f4);
       outline-offset: -1px;
     }
     .reset {
+      font: inherit;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--divider-color, #d0d0d0);
+      background: var(--primary-background-color, #fff);
+      color: var(--primary-text-color, #212121);
       cursor: pointer;
     }
     .reset:hover {
@@ -869,11 +1073,11 @@ let ot = class {
  * Copyright 2020 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const { I: Ft } = Pt, Fe = (i) => i, Wt = (i) => i.strings === void 0, We = () => document.createComment(""), Z = (i, e, t) => {
+const { I: qt } = Pt, Fe = (i) => i, Kt = (i) => i.strings === void 0, We = () => document.createComment(""), Z = (i, e, t) => {
   const s = i._$AA.parentNode, r = e === void 0 ? i._$AB : e._$AA;
   if (t === void 0) {
     const o = s.insertBefore(We(), r), n = s.insertBefore(We(), r);
-    t = new Ft(o, n, i, i.options);
+    t = new qt(o, n, i, i.options);
   } else {
     const o = t._$AB.nextSibling, n = t._$AM, a = n !== i;
     if (a) {
@@ -889,7 +1093,7 @@ const { I: Ft } = Pt, Fe = (i) => i, Wt = (i) => i.strings === void 0, We = () =
     }
   }
   return t;
-}, O = (i, e, t = i) => (i._$AI(e, t), i), qt = {}, Kt = (i, e = qt) => i._$AH = e, Gt = (i) => i._$AH, we = (i) => {
+}, O = (i, e, t = i) => (i._$AI(e, t), i), Gt = {}, Yt = (i, e = Gt) => i._$AH = e, Zt = (i) => i._$AH, we = (i) => {
   i._$AR(), i._$AA.remove();
 };
 /**
@@ -913,22 +1117,22 @@ const ee = (i, e) => {
     let t = e._$AN;
     if (t === void 0) e._$AN = t = /* @__PURE__ */ new Set();
     else if (t.has(i)) break;
-    t.add(i), Jt(e);
+    t.add(i), Qt(e);
   }
 };
-function Yt(i) {
+function Jt(i) {
   this._$AN !== void 0 ? (ge(this), this._$AM = i, nt(this)) : this._$AM = i;
 }
-function Zt(i, e = !1, t = 0) {
+function Xt(i, e = !1, t = 0) {
   const s = this._$AH, r = this._$AN;
   if (r !== void 0 && r.size !== 0) if (e) if (Array.isArray(s)) for (let o = t; o < s.length; o++) ee(s[o], !1), ge(s[o]);
   else s != null && (ee(s, !1), ge(s));
   else ee(this, i);
 }
-const Jt = (i) => {
-  i.type == ke.CHILD && (i._$AP ?? (i._$AP = Zt), i._$AQ ?? (i._$AQ = Yt));
+const Qt = (i) => {
+  i.type == ke.CHILD && (i._$AP ?? (i._$AP = Xt), i._$AQ ?? (i._$AQ = Jt));
 };
-class Xt extends ot {
+class ei extends ot {
   constructor() {
     super(...arguments), this._$AN = void 0;
   }
@@ -939,7 +1143,7 @@ class Xt extends ot {
     e !== this.isConnected && (this.isConnected = e, e ? this.reconnected?.() : this.disconnected?.()), t && (ee(this, e), ge(this));
   }
   setValue(e) {
-    if (Wt(this._$Ct)) this._$Ct._$AI(e, this);
+    if (Kt(this._$Ct)) this._$Ct._$AI(e, this);
     else {
       const t = [...this._$Ct._$AH];
       t[this._$Ci] = e, this._$Ct._$AI(t, this, 0);
@@ -959,7 +1163,7 @@ const qe = (i, e, t) => {
   const s = /* @__PURE__ */ new Map();
   for (let r = e; r <= t; r++) s.set(i[r], r);
   return s;
-}, Qt = rt(class extends ot {
+}, ti = rt(class extends ot {
   constructor(i) {
     if (super(i), i.type !== ke.CHILD) throw Error("repeat() can only be used in text expressions");
   }
@@ -975,7 +1179,7 @@ const qe = (i, e, t) => {
     return this.dt(i, e, t).values;
   }
   update(i, [e, t, s]) {
-    const r = Gt(i), { values: o, keys: n } = this.dt(e, t, s);
+    const r = Zt(i), { values: o, keys: n } = this.dt(e, t, s);
     if (!Array.isArray(r)) return this.ut = n, o;
     const a = this.ut ?? (this.ut = []), l = [];
     let h, d, c = 0, f = r.length - 1, _ = 0, b = o.length - 1;
@@ -1002,7 +1206,7 @@ const qe = (i, e, t) => {
       const S = r[c++];
       S !== null && we(S);
     }
-    return this.ut = n, Kt(i, l), M;
+    return this.ut = n, Yt(i, l), M;
   }
 });
 /**
@@ -1022,18 +1226,18 @@ class ye extends Event {
   }
 }
 ye.eventName = "visibilityChanged";
-class $e extends Event {
+class xe extends Event {
   constructor() {
-    super($e.eventName, { bubbles: !1 });
+    super(xe.eventName, { bubbles: !1 });
   }
 }
-$e.eventName = "unpinned";
+xe.eventName = "unpinned";
 /**
  * @license
  * Copyright 2021 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-class ei {
+class ii {
   constructor(e) {
     this._element = null;
     const t = e ?? window;
@@ -1067,7 +1271,7 @@ class ei {
     return this.scrollWidth - this.viewportWidth;
   }
 }
-class ti extends ei {
+class si extends ii {
   constructor(e, t) {
     super(t), this._clients = /* @__PURE__ */ new Set(), this._retarget = null, this._end = null, this.__destination = null, this.correctingScrollError = !1, this._checkForArrival = this._checkForArrival.bind(this), this._updateManagedScrollTo = this._updateManagedScrollTo.bind(this), this.scrollTo = this.scrollTo.bind(this), this.scrollBy = this.scrollBy.bind(this);
     const s = this._node;
@@ -1133,7 +1337,7 @@ class ti extends ei {
 let Ke = typeof window < "u" ? window.ResizeObserver : void 0;
 const Se = Symbol("virtualizerRef"), ce = "virtualizer-sizer";
 let Ge;
-class ii {
+class ri {
   constructor(e) {
     if (this._benchmarkStart = null, this._layout = null, this._clippingAncestors = [], this._scrollSize = null, this._scrollError = null, this._childrenPos = null, this._childMeasurements = null, this._toBeMeasured = /* @__PURE__ */ new Map(), this._rangeChanged = !0, this._itemsChanged = !0, this._visibilityChanged = !0, this._scrollerController = null, this._isScroller = !1, this._sizer = null, this._hostElementRO = null, this._childrenRO = null, this._mutationObserver = null, this._scrollEventListeners = [], this._scrollEventListenerOptions = {
       passive: !0
@@ -1162,7 +1366,7 @@ class ii {
   connected() {
     this._initObservers();
     const e = this._isScroller;
-    this._clippingAncestors = oi(this._hostElement, e), this._scrollerController = new ti(this, this._clippingAncestors[0]), this._schedule(this._updateLayout), this._observeAndListen(), this._connected = !0;
+    this._clippingAncestors = li(this._hostElement, e), this._scrollerController = new si(this, this._clippingAncestors[0]), this._schedule(this._updateLayout), this._observeAndListen(), this._connected = !0;
   }
   _observeAndListen() {
     this._mutationObserver.observe(this._hostElement, { childList: !0 }), this._hostElementRO.observe(this._hostElement), this._scrollEventListeners.push(window), window.addEventListener("scroll", this, this._scrollEventListenerOptions), this._clippingAncestors.forEach((e) => {
@@ -1237,7 +1441,7 @@ class ii {
    */
   _measureChild(e) {
     const { width: t, height: s } = e.getBoundingClientRect();
-    return Object.assign({ width: t, height: s }, si(e));
+    return Object.assign({ width: t, height: s }, oi(e));
   }
   async _schedule(e) {
     this._scheduled.has(e) || (this._scheduled.add(e), await Promise.resolve(), this._scheduled.delete(e), e.call(this));
@@ -1274,7 +1478,7 @@ class ii {
     }
   }
   _handleLayoutMessage(e) {
-    e.type === "stateChanged" ? this._updateDOM(e) : e.type === "visibilityChanged" ? (this._firstVisible = e.firstVisible, this._lastVisible = e.lastVisible, this._notifyVisibility()) : e.type === "unpinned" && this._hostElement.dispatchEvent(new $e());
+    e.type === "stateChanged" ? this._updateDOM(e) : e.type === "visibilityChanged" ? (this._firstVisible = e.firstVisible, this._lastVisible = e.lastVisible, this._notifyVisibility()) : e.type === "unpinned" && this._hostElement.dispatchEvent(new xe());
   }
   get _children() {
     const e = [];
@@ -1418,7 +1622,7 @@ class ii {
     this._scheduleLayoutComplete(), this._itemsChanged = !1, this._rangeChanged = !1;
   }
 }
-function si(i) {
+function oi(i) {
   const e = window.getComputedStyle(i);
   return {
     marginTop: de(e.marginTop),
@@ -1439,16 +1643,16 @@ function Ye(i) {
   const e = i.parentNode;
   return e && e.nodeType === Node.DOCUMENT_FRAGMENT_NODE && e.host || null;
 }
-function ri(i, e = !1) {
+function ni(i, e = !1) {
   const t = [];
   let s = e ? i : Ye(i);
   for (; s !== null; )
     t.push(s), s = Ye(s);
   return t;
 }
-function oi(i, e = !1) {
+function li(i, e = !1) {
   let t = !1;
-  return ri(i, e).filter((s) => {
+  return ni(i, e).filter((s) => {
     if (t)
       return !1;
     const r = getComputedStyle(s);
@@ -1461,7 +1665,7 @@ function oi(i, e = !1) {
  * SPDX-License-Identifier: BSD-3-Clause
  */
 const lt = (i) => i, at = (i, e) => p`${e}: ${JSON.stringify(i, null, 2)}`;
-class ni extends Xt {
+class ai extends ei {
   constructor(e) {
     if (super(e), this._virtualizer = null, this._first = 0, this._last = -1, this._renderItem = (t, s) => at(t, s + this._first), this._keyFunction = (t, s) => lt(t, s + this._first), this._items = [], e.type !== ke.CHILD)
       throw new Error("The virtualize directive can only be used in child expressions");
@@ -1472,7 +1676,7 @@ class ni extends Xt {
     if (this._first >= 0 && this._last >= this._first)
       for (let s = this._first; s <= this._last; s++)
         t.push(this._items[s]);
-    return Qt(t, this._keyFunction, this._renderItem);
+    return ti(t, this._keyFunction, this._renderItem);
   }
   update(e, [t]) {
     this._setFunctions(t);
@@ -1493,7 +1697,7 @@ class ni extends Xt {
   _makeVirtualizer(e, t) {
     this._virtualizer && this._virtualizer.disconnected();
     const { layout: s, scroller: r, items: o } = t;
-    this._virtualizer = new ii({ hostElement: e, layout: s, scroller: r }), this._virtualizer.items = o, this._virtualizer.connected();
+    this._virtualizer = new ri({ hostElement: e, layout: s, scroller: r }), this._virtualizer.items = o, this._virtualizer.connected();
   }
   _initialize(e, t) {
     const s = e.parentNode;
@@ -1508,13 +1712,13 @@ class ni extends Xt {
     this._virtualizer?.connected();
   }
 }
-const li = rt(ni);
+const hi = rt(ai);
 /**
  * @license
  * Copyright 2021 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-class W extends $ {
+class W extends x {
   constructor() {
     super(...arguments), this.items = [], this.renderItem = at, this.keyFunction = lt, this.layout = {}, this.scroller = !1;
   }
@@ -1523,7 +1727,7 @@ class W extends $ {
   }
   render() {
     const { items: e, renderItem: t, keyFunction: s, layout: r, scroller: o } = this;
-    return p`${li({
+    return p`${hi({
       items: e,
       renderItem: t,
       keyFunction: s,
@@ -1566,12 +1770,12 @@ le([
  * SPDX-License-Identifier: BSD-3-Clause
  */
 customElements.define("lit-virtualizer", W);
-var ai = Object.defineProperty, hi = Object.getOwnPropertyDescriptor, q = (i, e, t, s) => {
-  for (var r = s > 1 ? void 0 : s ? hi(e, t) : e, o = i.length - 1, n; o >= 0; o--)
+var ci = Object.defineProperty, di = Object.getOwnPropertyDescriptor, q = (i, e, t, s) => {
+  for (var r = s > 1 ? void 0 : s ? di(e, t) : e, o = i.length - 1, n; o >= 0; o--)
     (n = i[o]) && (r = (s ? n(e, t, r) : n(r)) || r);
-  return s && r && ai(e, t, r), r;
+  return s && r && ci(e, t, r), r;
 };
-let I = class extends $ {
+let I = class extends x {
   constructor() {
     super(...arguments), this.entities = [], this.areas = [], this.devices = [], this.selection = /* @__PURE__ */ new Set(), this.entityIdsWithState = /* @__PURE__ */ new Set();
   }
@@ -1812,12 +2016,12 @@ q([
 I = q([
   E("bee-entity-table")
 ], I);
-var ci = Object.defineProperty, di = Object.getOwnPropertyDescriptor, ht = (i, e, t, s) => {
-  for (var r = s > 1 ? void 0 : s ? di(e, t) : e, o = i.length - 1, n; o >= 0; o--)
+var ui = Object.defineProperty, pi = Object.getOwnPropertyDescriptor, ht = (i, e, t, s) => {
+  for (var r = s > 1 ? void 0 : s ? pi(e, t) : e, o = i.length - 1, n; o >= 0; o--)
     (n = i[o]) && (r = (s ? n(e, t, r) : n(r)) || r);
-  return s && r && ci(e, t, r), r;
+  return s && r && ui(e, t, r), r;
 };
-let me = class extends $ {
+let me = class extends x {
   constructor() {
     super(...arguments), this.count = 0;
   }
@@ -1919,12 +2123,12 @@ ht([
 me = ht([
   E("bee-action-bar")
 ], me);
-var ui = Object.defineProperty, pi = Object.getOwnPropertyDescriptor, Pe = (i, e, t, s) => {
-  for (var r = s > 1 ? void 0 : s ? pi(e, t) : e, o = i.length - 1, n; o >= 0; o--)
+var _i = Object.defineProperty, fi = Object.getOwnPropertyDescriptor, Pe = (i, e, t, s) => {
+  for (var r = s > 1 ? void 0 : s ? fi(e, t) : e, o = i.length - 1, n; o >= 0; o--)
     (n = i[o]) && (r = (s ? n(e, t, r) : n(r)) || r);
-  return s && r && ui(e, t, r), r;
+  return s && r && _i(e, t, r), r;
 };
-let re = class extends $ {
+let re = class extends x {
   constructor() {
     super(...arguments), this.open = !1, this.heading = "", this._onKey = (i) => {
       if (!(i.key !== "Escape" || !this.open)) {
@@ -2051,203 +2255,12 @@ Pe([
 re = Pe([
   E("bee-modal")
 ], re);
-var _i = Object.defineProperty, fi = Object.getOwnPropertyDescriptor, B = (i, e, t, s) => {
-  for (var r = s > 1 ? void 0 : s ? fi(e, t) : e, o = i.length - 1, n; o >= 0; o--)
-    (n = i[o]) && (r = (s ? n(e, t, r) : n(r)) || r);
-  return s && r && _i(e, t, r), r;
-};
-let z = class extends $ {
-  constructor() {
-    super(...arguments), this.options = [], this.value = "", this.placeholder = "", this.disabled = !1, this._open = !1, this._menuRect = null, this._onDocDown = (i) => {
-      i.composedPath().includes(this) || this._close();
-    }, this._onKey = (i) => {
-      i.key === "Escape" && this._open && (i.stopPropagation(), this._close());
-    }, this._toggle = (i) => {
-      i.stopPropagation(), !this.disabled && (this._open ? this._close() : this._openMenu());
-    }, this._close = () => {
-      this._open && (this._open = !1, this._menuRect = null, this._removeGlobalListeners());
-    };
-  }
-  disconnectedCallback() {
-    super.disconnectedCallback(), this._removeGlobalListeners();
-  }
-  _addGlobalListeners() {
-    document.addEventListener("mousedown", this._onDocDown, !0), document.addEventListener("keydown", this._onKey, !0), window.addEventListener("resize", this._close), window.addEventListener("scroll", this._close, !0);
-  }
-  _removeGlobalListeners() {
-    document.removeEventListener("mousedown", this._onDocDown, !0), document.removeEventListener("keydown", this._onKey, !0), window.removeEventListener("resize", this._close), window.removeEventListener("scroll", this._close, !0);
-  }
-  _openMenu() {
-    const i = this.renderRoot.querySelector(".trigger");
-    if (!i) return;
-    const e = i.getBoundingClientRect();
-    this._menuRect = {
-      top: e.bottom + 4,
-      left: e.left,
-      width: e.width
-    }, this._open = !0, queueMicrotask(() => this._addGlobalListeners());
-  }
-  _pick(i, e) {
-    e.stopPropagation(), this.value = i, this.dispatchEvent(
-      new CustomEvent("select-change", {
-        detail: i,
-        bubbles: !0,
-        composed: !0
-      })
-    ), this._close();
-  }
-  get _currentLabel() {
-    const i = this.options.find((e) => e.value === this.value);
-    return i ? i.label : this.placeholder;
-  }
-  render() {
-    return p`
-      <button
-        type="button"
-        class="trigger ${this._open ? "open" : ""}"
-        @click=${this._toggle}
-        ?disabled=${this.disabled}
-        aria-haspopup="listbox"
-        aria-expanded=${this._open}
-      >
-        <span class="label ${this.value ? "" : "placeholder"}">
-          ${this._currentLabel}
-        </span>
-        <span class="chev" aria-hidden="true">▾</span>
-      </button>
-      ${this._open && this._menuRect ? p`
-            <ul
-              class="menu"
-              role="listbox"
-              style=${`top:${this._menuRect.top}px;left:${this._menuRect.left}px;min-width:${this._menuRect.width}px;`}
-            >
-              ${this.options.map(
-      (i) => p`
-                  <li
-                    role="option"
-                    aria-selected=${i.value === this.value}
-                    class=${i.value === this.value ? "selected" : ""}
-                    @click=${(e) => this._pick(i.value, e)}
-                  >
-                    ${i.label}
-                  </li>
-                `
-    )}
-              ${this.options.length === 0 ? p`<li class="empty">No options</li>` : g}
-            </ul>
-          ` : g}
-    `;
-  }
-};
-z.styles = C`
-    :host {
-      display: inline-block;
-      position: relative;
-      width: 100%;
-    }
-    .trigger {
-      font: inherit;
-      width: 100%;
-      padding: 8px 10px;
-      border-radius: 6px;
-      border: 1px solid var(--divider-color, #d0d0d0);
-      background: var(--primary-background-color, #fff);
-      color: var(--primary-text-color, #212121);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      text-align: left;
-    }
-    .trigger:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-    .trigger:focus-visible,
-    .trigger.open {
-      outline: 2px solid var(--primary-color, #03a9f4);
-      outline-offset: -1px;
-    }
-    .label {
-      flex: 1 1 auto;
-      min-width: 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .placeholder {
-      color: var(--secondary-text-color, #727272);
-    }
-    .chev {
-      font-size: 12px;
-      color: var(--secondary-text-color, #727272);
-      flex: 0 0 auto;
-    }
-    .menu {
-      position: fixed;
-      z-index: 100;
-      margin: 0;
-      padding: 4px 0;
-      list-style: none;
-      background: var(--card-background-color, #fff);
-      color: var(--primary-text-color, #212121);
-      border: 1px solid var(--divider-color, #d0d0d0);
-      border-radius: 8px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
-      max-height: 280px;
-      overflow: auto;
-    }
-    .menu li {
-      padding: 8px 12px;
-      cursor: pointer;
-      font-size: 14px;
-      white-space: nowrap;
-    }
-    .menu li:hover {
-      background: var(--secondary-background-color, #f0f0f0);
-    }
-    .menu li.selected {
-      background: color-mix(
-        in srgb,
-        var(--primary-color, #03a9f4) 12%,
-        transparent
-      );
-      font-weight: 500;
-    }
-    .menu li.empty {
-      color: var(--secondary-text-color, #727272);
-      cursor: default;
-      font-style: italic;
-    }
-  `;
-B([
-  u({ attribute: !1 })
-], z.prototype, "options", 2);
-B([
-  u({ type: String })
-], z.prototype, "value", 2);
-B([
-  u({ type: String })
-], z.prototype, "placeholder", 2);
-B([
-  u({ type: Boolean })
-], z.prototype, "disabled", 2);
-B([
-  m()
-], z.prototype, "_open", 2);
-B([
-  m()
-], z.prototype, "_menuRect", 2);
-z = B([
-  E("bee-select")
-], z);
 var gi = Object.defineProperty, mi = Object.getOwnPropertyDescriptor, K = (i, e, t, s) => {
   for (var r = s > 1 ? void 0 : s ? mi(e, t) : e, o = i.length - 1, n; o >= 0; o--)
     (n = i[o]) && (r = (s ? n(e, t, r) : n(r)) || r);
   return s && r && gi(e, t, r), r;
 };
-let D = class extends $ {
+let D = class extends x {
   constructor() {
     super(...arguments), this.open = !1, this.areas = [], this.count = 0, this.running = !1, this._selectedAreaId = "";
   }
@@ -2388,7 +2401,7 @@ var bi = Object.defineProperty, vi = Object.getOwnPropertyDescriptor, ae = (i, e
     (n = i[o]) && (r = (s ? n(e, t, r) : n(r)) || r);
   return s && r && bi(e, t, r), r;
 };
-let N = class extends $ {
+let N = class extends x {
   constructor() {
     super(...arguments), this.open = !1, this.selected = [], this.running = !1, this._mode = "disable";
   }
@@ -2591,12 +2604,12 @@ ae([
 N = ae([
   E("bee-enable-disable-dialog")
 ], N);
-var yi = Object.defineProperty, $i = Object.getOwnPropertyDescriptor, he = (i, e, t, s) => {
-  for (var r = s > 1 ? void 0 : s ? $i(e, t) : e, o = i.length - 1, n; o >= 0; o--)
+var yi = Object.defineProperty, xi = Object.getOwnPropertyDescriptor, he = (i, e, t, s) => {
+  for (var r = s > 1 ? void 0 : s ? xi(e, t) : e, o = i.length - 1, n; o >= 0; o--)
     (n = i[o]) && (r = (s ? n(e, t, r) : n(r)) || r);
   return s && r && yi(e, t, r), r;
 };
-let U = class extends $ {
+let U = class extends x {
   constructor() {
     super(...arguments), this.open = !1, this.selected = [], this.running = !1, this._mode = "hide";
   }
@@ -2798,7 +2811,7 @@ he([
 U = he([
   E("bee-show-hide-dialog")
 ], U);
-const xi = /^[a-z0-9_]+\.[a-z0-9_]+$/, wi = /[.*+?^${}()|[\]\\]/g, Si = (i) => i.replace(wi, "\\$&"), Ci = (i, e) => e === "entity_id" ? i.entity_id : i.name ?? i.original_name ?? "", Ei = (i, e) => {
+const $i = /^[a-z0-9_]+\.[a-z0-9_]+$/, wi = /[.*+?^${}()|[\]\\]/g, Si = (i) => i.replace(wi, "\\$&"), Ci = (i, e) => e === "entity_id" ? i.entity_id : i.name ?? i.original_name ?? "", Ei = (i, e) => {
   if (!e.find) return i;
   if (e.regex)
     try {
@@ -2862,7 +2875,7 @@ function ki(i, e, t) {
   for (const l of n)
     a.set(l.newValue, (a.get(l.newValue) ?? 0) + 1);
   for (const l of n) {
-    if (!xi.test(l.newValue)) {
+    if (!$i.test(l.newValue)) {
       l.error = "Invalid entity_id — must be lowercase letters, digits, underscores, and one dot.";
       continue;
     }
@@ -2893,7 +2906,7 @@ var Mi = Object.defineProperty, Ii = Object.getOwnPropertyDescriptor, w = (i, e,
     (n = i[o]) && (r = (s ? n(e, t, r) : n(r)) || r);
   return s && r && Mi(e, t, r), r;
 };
-let x = class extends $ {
+let $ = class extends x {
   constructor() {
     super(...arguments), this.open = !1, this.selected = [], this.allEntityIds = [], this.running = !1, this._target = "friendly_name", this._mode = "prefix", this._text = "", this._find = "", this._replace = "", this._regex = !1, this._caseSensitive = !0;
   }
@@ -3087,7 +3100,7 @@ let x = class extends $ {
     `;
   }
 };
-x.styles = C`
+$.styles = C`
     :host {
       display: contents;
     }
@@ -3267,46 +3280,46 @@ x.styles = C`
   `;
 w([
   u({ type: Boolean })
-], x.prototype, "open", 2);
+], $.prototype, "open", 2);
 w([
   u({ attribute: !1 })
-], x.prototype, "selected", 2);
+], $.prototype, "selected", 2);
 w([
   u({ attribute: !1 })
-], x.prototype, "allEntityIds", 2);
+], $.prototype, "allEntityIds", 2);
 w([
   u({ type: Boolean })
-], x.prototype, "running", 2);
+], $.prototype, "running", 2);
 w([
   m()
-], x.prototype, "_target", 2);
+], $.prototype, "_target", 2);
 w([
   m()
-], x.prototype, "_mode", 2);
+], $.prototype, "_mode", 2);
 w([
   m()
-], x.prototype, "_text", 2);
+], $.prototype, "_text", 2);
 w([
   m()
-], x.prototype, "_find", 2);
+], $.prototype, "_find", 2);
 w([
   m()
-], x.prototype, "_replace", 2);
+], $.prototype, "_replace", 2);
 w([
   m()
-], x.prototype, "_regex", 2);
+], $.prototype, "_regex", 2);
 w([
   m()
-], x.prototype, "_caseSensitive", 2);
-x = w([
+], $.prototype, "_caseSensitive", 2);
+$ = w([
   E("bee-rename-dialog")
-], x);
+], $);
 var Di = Object.defineProperty, Ri = Object.getOwnPropertyDescriptor, Me = (i, e, t, s) => {
   for (var r = s > 1 ? void 0 : s ? Ri(e, t) : e, o = i.length - 1, n; o >= 0; o--)
     (n = i[o]) && (r = (s ? n(e, t, r) : n(r)) || r);
   return s && r && Di(e, t, r), r;
 };
-let oe = class extends $ {
+let oe = class extends x {
   constructor() {
     super(...arguments), this.open = !1, this.progress = null;
   }
@@ -3488,7 +3501,7 @@ var Oi = Object.defineProperty, Li = Object.getOwnPropertyDescriptor, y = (i, e,
     (n = i[o]) && (r = (s ? n(e, t, r) : n(r)) || r);
   return s && r && Oi(e, t, r), r;
 };
-let v = class extends $ {
+let v = class extends x {
   constructor() {
     super(...arguments), this.narrow = !1, this._entities = [], this._areas = [], this._devices = [], this._entityIdsWithState = /* @__PURE__ */ new Set(), this._loading = !0, this._error = null, this._filters = { ...He }, this._selection = /* @__PURE__ */ new Set(), this._activeDialog = null, this._running = !1, this._progress = null, this._resultsOpen = !1, this._lastRun = null, this._unsubscribers = [], this._onFiltersChange = (i) => {
       this._filters = { ...this._filters, ...i.detail };
@@ -3726,7 +3739,7 @@ let v = class extends $ {
         ></bee-results-dialog>
 
         <footer class="build-info">
-          v${"0.1.0"} · built ${"2026-04-18 06:41"}
+          v${"0.1.0"} · built ${"2026-04-18 07:01"}
         </footer>
       </div>
     `;

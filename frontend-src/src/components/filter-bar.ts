@@ -1,5 +1,6 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import "./bee-select.js";
 import type { HassArea } from "../types.js";
 import type {
   ActivityFilter,
@@ -32,6 +33,19 @@ export class BeeFilterBar extends LitElement {
 
   render() {
     const hasSearch = this.filters.search.length > 0;
+    const areaOptions = [
+      { value: "", label: "All areas" },
+      { value: "__none__", label: "— No area —" },
+      ...this.areas.map((a) => ({ value: a.area_id, label: a.name })),
+    ];
+    const domainOptions = [
+      { value: "", label: "All domains" },
+      ...this.domains.map((d) => ({ value: d, label: d })),
+    ];
+    const integrationOptions = [
+      { value: "", label: "All integrations" },
+      ...this.integrations.map((i) => ({ value: i, label: i })),
+    ];
     return html`
       <div class="bar">
         <div class="search-wrap">
@@ -56,63 +70,58 @@ export class BeeFilterBar extends LitElement {
             : ""}
         </div>
 
-        <select
-          .value=${this.filters.domain}
-          @change=${(e: Event) =>
-            this._emit({ domain: (e.target as HTMLSelectElement).value })}
-        >
-          <option value="">All domains</option>
-          ${this.domains.map(
-            (d) => html`<option value=${d}>${d}</option>`,
-          )}
-        </select>
+        <div class="select-slot">
+          <bee-select
+            .value=${this.filters.domain}
+            .options=${domainOptions}
+            @select-change=${(e: CustomEvent<string>) =>
+              this._emit({ domain: e.detail })}
+          ></bee-select>
+        </div>
 
-        <select
-          .value=${this.filters.areaId}
-          @change=${(e: Event) =>
-            this._emit({ areaId: (e.target as HTMLSelectElement).value })}
-        >
-          <option value="">All areas</option>
-          <option value="__none__">— No area —</option>
-          ${this.areas.map(
-            (a) => html`<option value=${a.area_id}>${a.name}</option>`,
-          )}
-        </select>
+        <div class="select-slot">
+          <bee-select
+            .value=${this.filters.areaId}
+            .options=${areaOptions}
+            @select-change=${(e: CustomEvent<string>) =>
+              this._emit({ areaId: e.detail })}
+          ></bee-select>
+        </div>
 
-        <select
-          .value=${this.filters.integration}
-          @change=${(e: Event) =>
-            this._emit({ integration: (e.target as HTMLSelectElement).value })}
-        >
-          <option value="">All integrations</option>
-          ${this.integrations.map(
-            (i) => html`<option value=${i}>${i}</option>`,
-          )}
-        </select>
+        <div class="select-slot">
+          <bee-select
+            .value=${this.filters.integration}
+            .options=${integrationOptions}
+            @select-change=${(e: CustomEvent<string>) =>
+              this._emit({ integration: e.detail })}
+          ></bee-select>
+        </div>
 
-        <select
-          .value=${this.filters.state}
-          @change=${(e: Event) =>
-            this._emit({
-              state: (e.target as HTMLSelectElement).value as StateFilter,
-            })}
-        >
-          <option value="all">All states</option>
-          <option value="active">Active only</option>
-          <option value="disabled">Disabled only</option>
-          <option value="hidden">Hidden only</option>
-        </select>
+        <div class="select-slot">
+          <bee-select
+            .value=${this.filters.state}
+            .options=${[
+              { value: "all", label: "All states" },
+              { value: "active", label: "Active only" },
+              { value: "disabled", label: "Disabled only" },
+              { value: "hidden", label: "Hidden only" },
+            ]}
+            @select-change=${(e: CustomEvent<string>) =>
+              this._emit({ state: e.detail as StateFilter })}
+          ></bee-select>
+        </div>
 
-        <select
-          .value=${this.filters.activity}
-          @change=${(e: Event) =>
-            this._emit({
-              activity: (e.target as HTMLSelectElement).value as ActivityFilter,
-            })}
-        >
-          <option value="any">Any activity</option>
-          <option value="never_received">Never received data</option>
-        </select>
+        <div class="select-slot">
+          <bee-select
+            .value=${this.filters.activity}
+            .options=${[
+              { value: "any", label: "Any activity" },
+              { value: "never_received", label: "Never received data" },
+            ]}
+            @select-change=${(e: CustomEvent<string>) =>
+              this._emit({ activity: e.detail as ActivityFilter })}
+          ></bee-select>
+        </div>
 
         <button class="reset" @click=${this._reset}>Reset</button>
       </div>
@@ -131,6 +140,7 @@ export class BeeFilterBar extends LitElement {
       background: var(--card-background-color, #fff);
       border-radius: 12px 12px 0 0;
       border-bottom: 1px solid var(--divider-color, #e0e0e0);
+      align-items: center;
     }
     .search-wrap {
       position: relative;
@@ -169,9 +179,11 @@ export class BeeFilterBar extends LitElement {
       background: var(--divider-color, #d0d0d0);
       color: var(--primary-text-color, #212121);
     }
-    input,
-    select,
-    button {
+    .select-slot {
+      flex: 0 1 160px;
+      min-width: 140px;
+    }
+    input {
       font: inherit;
       padding: 8px 10px;
       border-radius: 6px;
@@ -179,12 +191,17 @@ export class BeeFilterBar extends LitElement {
       background: var(--primary-background-color, #fff);
       color: var(--primary-text-color, #212121);
     }
-    input:focus,
-    select:focus {
+    input:focus {
       outline: 2px solid var(--primary-color, #03a9f4);
       outline-offset: -1px;
     }
     .reset {
+      font: inherit;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--divider-color, #d0d0d0);
+      background: var(--primary-background-color, #fff);
+      color: var(--primary-text-color, #212121);
       cursor: pointer;
     }
     .reset:hover {
