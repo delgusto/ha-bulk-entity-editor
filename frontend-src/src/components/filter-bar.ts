@@ -195,6 +195,7 @@ export class BeeFilterBar extends LitElement {
       position: relative;
       flex: 1 1 240px;
       min-width: 160px;
+      max-width: 320px;
       display: flex;
     }
     .search {
@@ -294,7 +295,10 @@ export class BeeFilterBar extends LitElement {
       flex-direction: column;
       gap: 12px;
     }
-    @media (max-width: 700px) {
+    /* 1024px covers iPads in landscape and narrow laptop windows — below
+       that, there isn't room for search + 5 dropdowns + reset in one row,
+       so we collapse to the Filters button pattern. */
+    @media (max-width: 1024px) {
       .bar {
         padding: 10px 12px;
       }
@@ -305,7 +309,8 @@ export class BeeFilterBar extends LitElement {
         display: inline-flex;
       }
       .search-wrap {
-        flex: 1 1 100%;
+        flex: 1 1 auto;
+        max-width: none;
       }
     }
   `;

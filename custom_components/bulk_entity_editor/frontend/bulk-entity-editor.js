@@ -262,9 +262,9 @@ H.elementStyles = [], H.shadowRootOptions = { mode: "open" }, H[Q("elementProper
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const ee = globalThis, Te = (i) => i, ge = ee.trustedTypes, Ve = ge ? ge.createPolicy("lit-html", { createHTML: (i) => i }) : void 0, Qe = "$lit$", k = `lit$${Math.random().toFixed(9).slice(2)}$`, et = "?" + k, xt = `<${et}>`, B = document, se = () => B.createComment(""), re = (i) => i === null || typeof i != "object" && typeof i != "function", ke = Array.isArray, $t = (i) => ke(i) || typeof i?.[Symbol.iterator] == "function", we = `[ 	
-\f\r]`, J = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, Be = /-->/g, Ne = />/g, R = RegExp(`>|${we}(?:([^\\s"'>=/]+)(${we}*=${we}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`, "g"), Ue = /'/g, je = /"/g, tt = /^(?:script|style|textarea|title)$/i, wt = (i) => (e, ...t) => ({ _$litType$: i, strings: e, values: t }), p = wt(1), M = Symbol.for("lit-noChange"), g = Symbol.for("lit-nothing"), He = /* @__PURE__ */ new WeakMap(), V = B.createTreeWalker(B, 129);
+const ee = globalThis, Te = (i) => i, ge = ee.trustedTypes, Ve = ge ? ge.createPolicy("lit-html", { createHTML: (i) => i }) : void 0, Qe = "$lit$", k = `lit$${Math.random().toFixed(9).slice(2)}$`, et = "?" + k, xt = `<${et}>`, B = document, se = () => B.createComment(""), re = (i) => i === null || typeof i != "object" && typeof i != "function", ke = Array.isArray, wt = (i) => ke(i) || typeof i?.[Symbol.iterator] == "function", $e = `[ 	
+\f\r]`, J = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, Be = /-->/g, Ne = />/g, R = RegExp(`>|${$e}(?:([^\\s"'>=/]+)(${$e}*=${$e}*(?:[^ 	
+\f\r"'\`<>=]|("|')|))|$)`, "g"), Ue = /'/g, je = /"/g, tt = /^(?:script|style|textarea|title)$/i, $t = (i) => (e, ...t) => ({ _$litType$: i, strings: e, values: t }), p = $t(1), M = Symbol.for("lit-noChange"), g = Symbol.for("lit-nothing"), He = /* @__PURE__ */ new WeakMap(), V = B.createTreeWalker(B, 129);
 function it(i, e) {
   if (!ke(i) || !i.hasOwnProperty("raw")) throw Error("invalid template strings array");
   return Ve !== void 0 ? Ve.createHTML(e) : e;
@@ -371,7 +371,7 @@ class W {
     return this._$AB;
   }
   _$AI(e, t = this) {
-    e = F(this, e, t), re(e) ? e === g || e == null || e === "" ? (this._$AH !== g && this._$AR(), this._$AH = g) : e !== this._$AH && e !== M && this._(e) : e._$litType$ !== void 0 ? this.$(e) : e.nodeType !== void 0 ? this.T(e) : $t(e) ? this.k(e) : this._(e);
+    e = F(this, e, t), re(e) ? e === g || e == null || e === "" ? (this._$AH !== g && this._$AR(), this._$AH = g) : e !== this._$AH && e !== M && this._(e) : e._$litType$ !== void 0 ? this.$(e) : e.nodeType !== void 0 ? this.T(e) : wt(e) ? this.k(e) : this._(e);
   }
   O(e) {
     return this._$AA.parentNode.insertBefore(e, this._$AB);
@@ -1129,6 +1129,7 @@ I.styles = C`
       position: relative;
       flex: 1 1 240px;
       min-width: 160px;
+      max-width: 320px;
       display: flex;
     }
     .search {
@@ -1228,7 +1229,10 @@ I.styles = C`
       flex-direction: column;
       gap: 12px;
     }
-    @media (max-width: 700px) {
+    /* 1024px covers iPads in landscape and narrow laptop windows — below
+       that, there isn't room for search + 5 dropdowns + reset in one row,
+       so we collapse to the Filters button pattern. */
+    @media (max-width: 1024px) {
       .bar {
         padding: 10px 12px;
       }
@@ -1239,7 +1243,8 @@ I.styles = C`
         display: inline-flex;
       }
       .search-wrap {
-        flex: 1 1 100%;
+        flex: 1 1 auto;
+        max-width: none;
       }
     }
   `;
@@ -1447,12 +1452,12 @@ class xe extends Event {
   }
 }
 xe.eventName = "visibilityChanged";
-class $e extends Event {
+class we extends Event {
   constructor() {
-    super($e.eventName, { bubbles: !1 });
+    super(we.eventName, { bubbles: !1 });
   }
 }
-$e.eventName = "unpinned";
+we.eventName = "unpinned";
 /**
  * @license
  * Copyright 2021 Google LLC
@@ -1699,7 +1704,7 @@ class ni {
     }
   }
   _handleLayoutMessage(e) {
-    e.type === "stateChanged" ? this._updateDOM(e) : e.type === "visibilityChanged" ? (this._firstVisible = e.firstVisible, this._lastVisible = e.lastVisible, this._notifyVisibility()) : e.type === "unpinned" && this._hostElement.dispatchEvent(new $e());
+    e.type === "stateChanged" ? this._updateDOM(e) : e.type === "visibilityChanged" ? (this._firstVisible = e.firstVisible, this._lastVisible = e.lastVisible, this._notifyVisibility()) : e.type === "unpinned" && this._hostElement.dispatchEvent(new we());
   }
   get _children() {
     const e = [];
@@ -2212,7 +2217,7 @@ D.styles = C`
       text-overflow: ellipsis;
       margin-top: 2px;
     }
-    @media (max-width: 700px) {
+    @media (max-width: 1024px) {
       .hide-on-narrow {
         display: none !important;
       }
@@ -2326,44 +2331,55 @@ be.styles = C`
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      padding: 12px 20px;
+      gap: 12px;
+      padding: 10px 16px;
       background: var(--primary-color, #03a9f4);
       color: var(--text-primary-color, #fff);
       border-radius: 0 0 12px 12px;
-      flex-wrap: wrap;
     }
     .count {
-      font-size: 14px;
+      font-size: 13px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
+      flex: 0 0 auto;
+      white-space: nowrap;
     }
     .link {
       background: transparent;
       border: 1px solid rgba(255, 255, 255, 0.6);
       color: inherit;
       font: inherit;
-      padding: 4px 10px;
+      padding: 3px 8px;
       border-radius: 6px;
       cursor: pointer;
+      font-size: 12px;
     }
     .link:hover {
       background: rgba(255, 255, 255, 0.15);
     }
     .actions {
       display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
+      gap: 6px;
+      flex: 1 1 auto;
+      justify-content: flex-end;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .actions::-webkit-scrollbar {
+      display: none;
     }
     .actions button {
       font: inherit;
-      padding: 8px 14px;
+      font-size: 13px;
+      padding: 6px 12px;
       border-radius: 6px;
       border: 0;
       background: rgba(255, 255, 255, 0.18);
       color: inherit;
       cursor: pointer;
+      white-space: nowrap;
+      flex: 0 0 auto;
     }
     .actions button:hover:not(:disabled) {
       background: rgba(255, 255, 255, 0.3);
@@ -2371,6 +2387,22 @@ be.styles = C`
     .actions button:disabled {
       opacity: 0.5;
       cursor: not-allowed;
+    }
+    @media (max-width: 1024px) {
+      .bar {
+        padding: 8px 12px;
+        gap: 8px;
+      }
+      .count {
+        font-size: 12px;
+      }
+      .actions {
+        justify-content: flex-start;
+      }
+      .actions button {
+        padding: 6px 10px;
+        font-size: 12px;
+      }
     }
   `;
 ht([
@@ -2935,7 +2967,7 @@ ce([
 U = ce([
   E("bee-show-hide-dialog")
 ], U);
-const $i = /^[a-z0-9_]+\.[a-z0-9_]+$/, wi = /[.*+?^${}()|[\]\\]/g, Si = (i) => i.replace(wi, "\\$&"), Ci = (i, e) => e === "entity_id" ? i.entity_id : i.name ?? i.original_name ?? "", Ei = (i, e) => {
+const wi = /^[a-z0-9_]+\.[a-z0-9_]+$/, $i = /[.*+?^${}()|[\]\\]/g, Si = (i) => i.replace($i, "\\$&"), Ci = (i, e) => e === "entity_id" ? i.entity_id : i.name ?? i.original_name ?? "", Ei = (i, e) => {
   if (!e.find) return i;
   if (e.regex)
     try {
@@ -2999,7 +3031,7 @@ function ki(i, e, t) {
   for (const l of n)
     a.set(l.newValue, (a.get(l.newValue) ?? 0) + 1);
   for (const l of n) {
-    if (!$i.test(l.newValue)) {
+    if (!wi.test(l.newValue)) {
       l.error = "Invalid entity_id — must be lowercase letters, digits, underscores, and one dot.";
       continue;
     }
@@ -3025,12 +3057,12 @@ function Pi(i) {
     r.error ? s += 1 : r.changed ? e += 1 : t += 1;
   return { applicable: e, unchanged: t, errors: s };
 }
-var Mi = Object.defineProperty, Ii = Object.getOwnPropertyDescriptor, w = (i, e, t, s) => {
+var Mi = Object.defineProperty, Ii = Object.getOwnPropertyDescriptor, $ = (i, e, t, s) => {
   for (var r = s > 1 ? void 0 : s ? Ii(e, t) : e, o = i.length - 1, n; o >= 0; o--)
     (n = i[o]) && (r = (s ? n(e, t, r) : n(r)) || r);
   return s && r && Mi(e, t, r), r;
 };
-let $ = class extends x {
+let w = class extends x {
   constructor() {
     super(...arguments), this.open = !1, this.selected = [], this.allEntityIds = [], this.running = !1, this._target = "friendly_name", this._mode = "prefix", this._text = "", this._find = "", this._replace = "", this._regex = !1, this._caseSensitive = !0;
   }
@@ -3224,7 +3256,7 @@ let $ = class extends x {
     `;
   }
 };
-$.styles = C`
+w.styles = C`
     :host {
       display: contents;
     }
@@ -3402,42 +3434,42 @@ $.styles = C`
       cursor: not-allowed;
     }
   `;
-w([
+$([
   u({ type: Boolean })
-], $.prototype, "open", 2);
-w([
+], w.prototype, "open", 2);
+$([
   u({ attribute: !1 })
-], $.prototype, "selected", 2);
-w([
+], w.prototype, "selected", 2);
+$([
   u({ attribute: !1 })
-], $.prototype, "allEntityIds", 2);
-w([
+], w.prototype, "allEntityIds", 2);
+$([
   u({ type: Boolean })
-], $.prototype, "running", 2);
-w([
+], w.prototype, "running", 2);
+$([
   m()
-], $.prototype, "_target", 2);
-w([
+], w.prototype, "_target", 2);
+$([
   m()
-], $.prototype, "_mode", 2);
-w([
+], w.prototype, "_mode", 2);
+$([
   m()
-], $.prototype, "_text", 2);
-w([
+], w.prototype, "_text", 2);
+$([
   m()
-], $.prototype, "_find", 2);
-w([
+], w.prototype, "_find", 2);
+$([
   m()
-], $.prototype, "_replace", 2);
-w([
+], w.prototype, "_replace", 2);
+$([
   m()
-], $.prototype, "_regex", 2);
-w([
+], w.prototype, "_regex", 2);
+$([
   m()
-], $.prototype, "_caseSensitive", 2);
-$ = w([
+], w.prototype, "_caseSensitive", 2);
+w = $([
   E("bee-rename-dialog")
-], $);
+], w);
 var Di = Object.defineProperty, Oi = Object.getOwnPropertyDescriptor, Ie = (i, e, t, s) => {
   for (var r = s > 1 ? void 0 : s ? Oi(e, t) : e, o = i.length - 1, n; o >= 0; o--)
     (n = i[o]) && (r = (s ? n(e, t, r) : n(r)) || r);
@@ -3779,7 +3811,7 @@ let v = class extends x {
   }
   _formatBuildTime() {
     try {
-      return (/* @__PURE__ */ new Date("2026-04-18T21:26:02.015Z")).toLocaleString(void 0, {
+      return (/* @__PURE__ */ new Date("2026-04-18T21:43:49.540Z")).toLocaleString(void 0, {
         year: "numeric",
         month: "short",
         day: "2-digit",
@@ -3787,7 +3819,7 @@ let v = class extends x {
         minute: "2-digit"
       });
     } catch {
-      return "2026-04-18T21:26:02.015Z";
+      return "2026-04-18T21:43:49.540Z";
     }
   }
   render() {

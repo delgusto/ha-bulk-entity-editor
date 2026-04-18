@@ -55,44 +55,55 @@ export class BeeActionBar extends LitElement {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      padding: 12px 20px;
+      gap: 12px;
+      padding: 10px 16px;
       background: var(--primary-color, #03a9f4);
       color: var(--text-primary-color, #fff);
       border-radius: 0 0 12px 12px;
-      flex-wrap: wrap;
     }
     .count {
-      font-size: 14px;
+      font-size: 13px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
+      flex: 0 0 auto;
+      white-space: nowrap;
     }
     .link {
       background: transparent;
       border: 1px solid rgba(255, 255, 255, 0.6);
       color: inherit;
       font: inherit;
-      padding: 4px 10px;
+      padding: 3px 8px;
       border-radius: 6px;
       cursor: pointer;
+      font-size: 12px;
     }
     .link:hover {
       background: rgba(255, 255, 255, 0.15);
     }
     .actions {
       display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
+      gap: 6px;
+      flex: 1 1 auto;
+      justify-content: flex-end;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .actions::-webkit-scrollbar {
+      display: none;
     }
     .actions button {
       font: inherit;
-      padding: 8px 14px;
+      font-size: 13px;
+      padding: 6px 12px;
       border-radius: 6px;
       border: 0;
       background: rgba(255, 255, 255, 0.18);
       color: inherit;
       cursor: pointer;
+      white-space: nowrap;
+      flex: 0 0 auto;
     }
     .actions button:hover:not(:disabled) {
       background: rgba(255, 255, 255, 0.3);
@@ -100,6 +111,22 @@ export class BeeActionBar extends LitElement {
     .actions button:disabled {
       opacity: 0.5;
       cursor: not-allowed;
+    }
+    @media (max-width: 1024px) {
+      .bar {
+        padding: 8px 12px;
+        gap: 8px;
+      }
+      .count {
+        font-size: 12px;
+      }
+      .actions {
+        justify-content: flex-start;
+      }
+      .actions button {
+        padding: 6px 10px;
+        font-size: 12px;
+      }
     }
   `;
 }
