@@ -87,11 +87,7 @@ export class BeeActionBar extends LitElement {
       gap: 6px;
       flex: 1 1 auto;
       justify-content: flex-end;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .actions::-webkit-scrollbar {
-      display: none;
+      flex-wrap: wrap;
     }
     .actions button {
       font: inherit;
@@ -114,18 +110,27 @@ export class BeeActionBar extends LitElement {
     }
     @media (max-width: 1024px) {
       .bar {
-        padding: 8px 12px;
-        gap: 8px;
+        padding: 10px 12px;
+        gap: 10px;
+        flex-direction: column;
+        align-items: stretch;
       }
       .count {
         font-size: 12px;
+        justify-content: space-between;
       }
+      /* Even 2×2 grid so all four actions are always visible on mobile
+         without horizontal scrolling or hidden items. */
       .actions {
-        justify-content: flex-start;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+        justify-content: stretch;
       }
       .actions button {
-        padding: 6px 10px;
-        font-size: 12px;
+        padding: 8px 10px;
+        font-size: 13px;
+        width: 100%;
       }
     }
   `;

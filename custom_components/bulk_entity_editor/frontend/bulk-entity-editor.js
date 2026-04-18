@@ -2363,11 +2363,7 @@ be.styles = C`
       gap: 6px;
       flex: 1 1 auto;
       justify-content: flex-end;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .actions::-webkit-scrollbar {
-      display: none;
+      flex-wrap: wrap;
     }
     .actions button {
       font: inherit;
@@ -2390,18 +2386,27 @@ be.styles = C`
     }
     @media (max-width: 1024px) {
       .bar {
-        padding: 8px 12px;
-        gap: 8px;
+        padding: 10px 12px;
+        gap: 10px;
+        flex-direction: column;
+        align-items: stretch;
       }
       .count {
         font-size: 12px;
+        justify-content: space-between;
       }
+      /* Even 2×2 grid so all four actions are always visible on mobile
+         without horizontal scrolling or hidden items. */
       .actions {
-        justify-content: flex-start;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+        justify-content: stretch;
       }
       .actions button {
-        padding: 6px 10px;
-        font-size: 12px;
+        padding: 8px 10px;
+        font-size: 13px;
+        width: 100%;
       }
     }
   `;
@@ -3811,7 +3816,7 @@ let v = class extends x {
   }
   _formatBuildTime() {
     try {
-      return (/* @__PURE__ */ new Date("2026-04-18T21:43:49.540Z")).toLocaleString(void 0, {
+      return (/* @__PURE__ */ new Date("2026-04-18T21:58:10.546Z")).toLocaleString(void 0, {
         year: "numeric",
         month: "short",
         day: "2-digit",
@@ -3819,7 +3824,7 @@ let v = class extends x {
         minute: "2-digit"
       });
     } catch {
-      return "2026-04-18T21:43:49.540Z";
+      return "2026-04-18T21:58:10.546Z";
     }
   }
   render() {
