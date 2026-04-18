@@ -6,6 +6,7 @@ import type {
   HassEntityRegistryEntry,
   HassPanelInfo,
   HassRoute,
+  HassState,
   HomeAssistant,
 } from "./types.js";
 import {
@@ -55,6 +56,7 @@ export class BulkEntityEditorPanel extends LitElement {
   @state() private _entities: HassEntityRegistryEntry[] = [];
   @state() private _areas: HassArea[] = [];
   @state() private _devices: HassDevice[] = [];
+  @state() private _entityIdsWithState: Set<string> = new Set();
   @state() private _loading = true;
   @state() private _error: string | null = null;
 
@@ -86,16 +88,18 @@ export class BulkEntityEditorPanel extends LitElement {
     this._loading = this._entities.length === 0;
     this._error = null;
     try {
-      const [entities, areas, devices] = await Promise.all([
+      const [entities, areas, devices, states] = await Promise.all([
         this.hass.callWS<HassEntityRegistryEntry[]>({
           type: "config/entity_registry/list",
         }),
         this.hass.callWS<HassArea[]>({ type: "config/area_registry/list" }),
         this.hass.callWS<HassDevice[]>({ type: "config/device_registry/list" }),
+        this.hass.callWS<HassState[]>({ type: "get_states" }),
       ]);
       this._entities = entities;
       this._areas = areas;
       this._devices = devices;
+      this._entityIdsWithState = new Set(states.map((s) => s.entity_id));
     } catch (err) {
       this._error = err instanceof Error ? err.message : String(err);
     } finally {
@@ -125,7 +129,12 @@ export class BulkEntityEditorPanel extends LitElement {
   }
 
   private get _filteredEntities(): HassEntityRegistryEntry[] {
-    return filterEntities(this._entities, this._devices, this._filters);
+    return filterEntities(
+      this._entities,
+      this._devices,
+      this._filters,
+      this._entityIdsWithState,
+    );
   }
 
   private get _selectedEntities(): HassEntityRegistryEntry[] {
@@ -328,6 +337,7 @@ export class BulkEntityEditorPanel extends LitElement {
                     .areas=${this._areas}
                     .devices=${this._devices}
                     .selection=${this._selection}
+                    .entityIdsWithState=${this._entityIdsWithState}
                     @toggle-entity=${this._onToggleEntity}
                     @toggle-all-visible=${this._onToggleAllVisible}
                   ></bee-entity-table>

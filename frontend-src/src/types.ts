@@ -42,6 +42,14 @@ export interface HassRoute {
   path: string;
 }
 
+export interface HassState {
+  entity_id: string;
+  state: string;
+  last_changed: string;
+  last_updated: string;
+  attributes: Record<string, unknown>;
+}
+
 export interface HomeAssistant {
   callWS<T = unknown>(msg: Record<string, unknown>): Promise<T>;
   connection: {

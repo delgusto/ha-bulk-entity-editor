@@ -1,6 +1,7 @@
 import type { HassDevice, HassEntityRegistryEntry } from "../types.js";
 
 export type StateFilter = "all" | "active" | "disabled" | "hidden";
+export type ActivityFilter = "any" | "never_received";
 
 export interface FilterState {
   search: string;
@@ -8,6 +9,7 @@ export interface FilterState {
   areaId: string; // "" = all, "__none__" = no area
   integration: string; // "" = all
   state: StateFilter;
+  activity: ActivityFilter;
 }
 
 export const DEFAULT_FILTER_STATE: FilterState = {
@@ -16,7 +18,19 @@ export const DEFAULT_FILTER_STATE: FilterState = {
   areaId: "",
   integration: "",
   state: "all",
+  activity: "any",
 };
+
+/** True when the entity is enabled in the registry but has no state object
+ *  (i.e., the integration has never pushed a value for it). Disabled
+ *  entities are excluded because they don't have states by design. */
+export function hasNeverReceivedData(
+  entity: HassEntityRegistryEntry,
+  entityIdsWithState: Set<string>,
+): boolean {
+  if (entity.disabled_by) return false;
+  return !entityIdsWithState.has(entity.entity_id);
+}
 
 const effectiveArea = (
   entity: HassEntityRegistryEntry,
@@ -34,6 +48,7 @@ export function filterEntities(
   entities: HassEntityRegistryEntry[],
   devices: HassDevice[],
   filters: FilterState,
+  entityIdsWithState?: Set<string>,
 ): HassEntityRegistryEntry[] {
   const devicesById = new Map(devices.map((d) => [d.id, d]));
   const needle = filters.search.trim().toLowerCase();
@@ -66,6 +81,14 @@ export function filterEntities(
       case "hidden":
         if (!e.hidden_by) return false;
         break;
+    }
+
+    if (
+      filters.activity === "never_received" &&
+      (!entityIdsWithState ||
+        !hasNeverReceivedData(e, entityIdsWithState))
+    ) {
+      return false;
     }
 
     if (needle) {

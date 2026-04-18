@@ -13,6 +13,7 @@ export class BeeEntityTable extends LitElement {
   @property({ attribute: false }) areas: HassArea[] = [];
   @property({ attribute: false }) devices: HassDevice[] = [];
   @property({ attribute: false }) selection: Set<string> = new Set();
+  @property({ attribute: false }) entityIdsWithState: Set<string> = new Set();
 
   private _areaName(areaId: string | null): string {
     if (!areaId) return "—";
@@ -31,7 +32,15 @@ export class BeeEntityTable extends LitElement {
   private _stateLabel(e: HassEntityRegistryEntry): string {
     if (e.disabled_by) return "Disabled";
     if (e.hidden_by) return "Hidden";
+    if (!this.entityIdsWithState.has(e.entity_id)) return "No data";
     return "Active";
+  }
+
+  private _stateClass(e: HassEntityRegistryEntry): string {
+    if (e.disabled_by) return "state-disabled";
+    if (e.hidden_by) return "state-hidden";
+    if (!this.entityIdsWithState.has(e.entity_id)) return "state-nodata";
+    return "";
   }
 
   private _toggle(entityId: string) {
@@ -100,11 +109,7 @@ export class BeeEntityTable extends LitElement {
               .filter(Boolean)
               .join(" ");
             const stateLabel = this._stateLabel(e);
-            const stateClass = e.disabled_by
-              ? "state-disabled"
-              : e.hidden_by
-                ? "state-hidden"
-                : "";
+            const stateClass = this._stateClass(e);
             return html`
               <div
                 class=${rowClasses}
@@ -222,6 +227,11 @@ export class BeeEntityTable extends LitElement {
         transparent
       );
       color: var(--warning-color, #e65100);
+    }
+    .state-pill.state-nodata {
+      background: var(--secondary-background-color, #ececec);
+      color: var(--secondary-text-color, #727272);
+      border: 1px dashed var(--divider-color, #c0c0c0);
     }
     .cell {
       padding: 10px 12px;

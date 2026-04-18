@@ -1,7 +1,11 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import type { HassArea } from "../types.js";
-import type { FilterState, StateFilter } from "../lib/filters.js";
+import type {
+  ActivityFilter,
+  FilterState,
+  StateFilter,
+} from "../lib/filters.js";
 
 @customElement("bee-filter-bar")
 export class BeeFilterBar extends LitElement {
@@ -97,6 +101,17 @@ export class BeeFilterBar extends LitElement {
           <option value="active">Active only</option>
           <option value="disabled">Disabled only</option>
           <option value="hidden">Hidden only</option>
+        </select>
+
+        <select
+          .value=${this.filters.activity}
+          @change=${(e: Event) =>
+            this._emit({
+              activity: (e.target as HTMLSelectElement).value as ActivityFilter,
+            })}
+        >
+          <option value="any">Any activity</option>
+          <option value="never_received">Never received data</option>
         </select>
 
         <button class="reset" @click=${this._reset}>Reset</button>
