@@ -2304,7 +2304,7 @@ let be = class extends x {
     return this.count === 0 ? null : p`
       <div class="bar" role="toolbar" aria-label="Bulk actions">
         <div class="count">
-          <strong>${this.count}</strong> selected
+          <span><strong>${this.count}</strong> selected</span>
           <button class="link" @click=${this._clear}>Clear</button>
         </div>
         <div class="actions">
@@ -3269,6 +3269,8 @@ w.styles = C`
       display: flex;
       flex-direction: column;
       gap: 12px;
+      align-items: stretch;
+      justify-content: flex-start;
     }
     .row {
       display: flex;
@@ -3327,7 +3329,7 @@ w.styles = C`
     .stats {
       display: flex;
       gap: 24px;
-      margin: 4px 0;
+      margin: 0;
     }
     .stats div {
       display: flex;
@@ -3354,8 +3356,9 @@ w.styles = C`
       border-radius: 8px;
       display: flex;
       flex-direction: column;
-      min-height: 200px;
+      min-height: 120px;
       max-height: 320px;
+      flex: 0 1 auto;
     }
     .preview-head {
       padding: 8px 12px;
@@ -3816,7 +3819,7 @@ let v = class extends x {
   }
   _formatBuildTime() {
     try {
-      return (/* @__PURE__ */ new Date("2026-04-18T21:58:10.546Z")).toLocaleString(void 0, {
+      return (/* @__PURE__ */ new Date("2026-04-18T22:27:12.957Z")).toLocaleString(void 0, {
         year: "numeric",
         month: "short",
         day: "2-digit",
@@ -3824,7 +3827,7 @@ let v = class extends x {
         minute: "2-digit"
       });
     } catch {
-      return "2026-04-18T21:58:10.546Z";
+      return "2026-04-18T22:27:12.957Z";
     }
   }
   render() {

@@ -28,7 +28,7 @@ export class BeeActionBar extends LitElement {
     return html`
       <div class="bar" role="toolbar" aria-label="Bulk actions">
         <div class="count">
-          <strong>${this.count}</strong> selected
+          <span><strong>${this.count}</strong> selected</span>
           <button class="link" @click=${this._clear}>Clear</button>
         </div>
         <div class="actions">

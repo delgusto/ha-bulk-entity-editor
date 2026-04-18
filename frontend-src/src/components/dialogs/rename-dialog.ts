@@ -273,6 +273,8 @@ export class BeeRenameDialog extends LitElement {
       display: flex;
       flex-direction: column;
       gap: 12px;
+      align-items: stretch;
+      justify-content: flex-start;
     }
     .row {
       display: flex;
@@ -331,7 +333,7 @@ export class BeeRenameDialog extends LitElement {
     .stats {
       display: flex;
       gap: 24px;
-      margin: 4px 0;
+      margin: 0;
     }
     .stats div {
       display: flex;
@@ -358,8 +360,9 @@ export class BeeRenameDialog extends LitElement {
       border-radius: 8px;
       display: flex;
       flex-direction: column;
-      min-height: 200px;
+      min-height: 120px;
       max-height: 320px;
+      flex: 0 1 auto;
     }
     .preview-head {
       padding: 8px 12px;
