@@ -45,9 +45,9 @@ A Home Assistant custom integration that adds a **Bulk Editor** panel to your si
 
 ## Screenshots
 
-| Change area | Rename with preview |
-|---|---|
-| ![Change area dialog](docs/screenshots/change-area.png) | ![Rename dialog with preview](docs/screenshots/rename.png) |
+| List & select entities | Change area | Rename with preview |
+|---|---|---|
+| ![Change area dialog](docs/screenshots/list_page.png) | ![Rename dialog with preview](docs/screenshots/move_area.png) | ![Rename dialog with preview](docs/screenshots/rename.png) |
 
 ## Usage
 
