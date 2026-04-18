@@ -4,8 +4,9 @@ from __future__ import annotations
 import logging
 from pathlib import Path
 
+from aiohttp import web
 from homeassistant.components.frontend import async_register_built_in_panel, async_remove_panel
-from homeassistant.components.http import StaticPathConfig
+from homeassistant.components.http import HomeAssistantView
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 
@@ -14,7 +15,6 @@ from .const import (
     PANEL_FILENAME,
     PANEL_ICON,
     PANEL_JS_URL,
-    PANEL_STATIC_URL_PREFIX,
     PANEL_TITLE,
     PANEL_URL_PATH,
     PANEL_WEBCOMPONENT_NAME,
@@ -22,7 +22,37 @@ from .const import (
 
 _LOGGER = logging.getLogger(__name__)
 
-_STATIC_REGISTERED_KEY = "static_path_registered"
+_VIEW_REGISTERED_KEY = "view_registered"
+
+
+class PanelAssetView(HomeAssistantView):
+    """Serves the panel bundle with mtime-based ETag and no-cache headers so
+    clients always revalidate — any time the file on disk changes, browsers
+    and WKWebView pick it up without an HA restart or integration reload."""
+
+    requires_auth = False
+    url = PANEL_JS_URL
+    name = f"api:{DOMAIN}:panel"
+
+    def __init__(self, file_path: Path) -> None:
+        self._file_path = file_path
+
+    async def get(self, request: web.Request) -> web.StreamResponse:
+        if not self._file_path.is_file():
+            raise web.HTTPNotFound()
+
+        stat = self._file_path.stat()
+        etag = f'W/"{int(stat.st_mtime)}-{stat.st_size}"'
+        headers = {
+            "ETag": etag,
+            "Cache-Control": "no-cache, must-revalidate",
+            "Content-Type": "application/javascript; charset=utf-8",
+        }
+
+        if request.headers.get("If-None-Match") == etag:
+            return web.Response(status=304, headers=headers)
+
+        return web.FileResponse(path=self._file_path, headers=headers)
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
@@ -37,27 +67,13 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         )
         return False
 
-    # HA doesn't expose a way to un-register static paths, so we guard against
-    # double-registration if the integration gets reloaded during the same
-    # HA process lifetime.
+    # HA has no public API to un-register an HTTP view, so we guard against
+    # double-registration if the integration gets reloaded in the same
+    # process lifetime.
     domain_data = hass.data.setdefault(DOMAIN, {})
-    if not domain_data.get(_STATIC_REGISTERED_KEY):
-        await hass.http.async_register_static_paths(
-            [
-                StaticPathConfig(
-                    PANEL_STATIC_URL_PREFIX,
-                    str(frontend_dir),
-                    cache_headers=False,
-                )
-            ]
-        )
-        domain_data[_STATIC_REGISTERED_KEY] = True
-
-    # Cache-bust the module URL with the bundle's mtime so browsers (and
-    # WKWebView in the macOS/iOS companion app, which is particularly sticky)
-    # always fetch a fresh copy after a rebuild.
-    bundle_version = int(panel_file.stat().st_mtime)
-    versioned_js_url = f"{PANEL_JS_URL}?v={bundle_version}"
+    if not domain_data.get(_VIEW_REGISTERED_KEY):
+        hass.http.register_view(PanelAssetView(panel_file))
+        domain_data[_VIEW_REGISTERED_KEY] = True
 
     async_register_built_in_panel(
         hass,
@@ -70,9 +86,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                 "name": PANEL_WEBCOMPONENT_NAME,
                 "embed_iframe": False,
                 "trust_external": False,
-                # The Vite bundle is an ES module (uses `export`). We must
-                # load it via module_url so the browser treats it as one.
-                "module_url": versioned_js_url,
+                # The Vite bundle is an ES module — load via module_url so the
+                # browser parses `export` statements. PanelAssetView serves
+                # this URL with ETag + no-cache so clients always revalidate.
+                "module_url": PANEL_JS_URL,
             }
         },
         require_admin=True,
@@ -84,6 +101,5 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Unload a config entry."""
     async_remove_panel(hass, PANEL_URL_PATH)
-    # Note: we intentionally keep the static path registered — HA has no
-    # public API to remove it, and re-registering on re-setup would raise.
+    # HTTP view stays registered — HA exposes no clean way to remove it.
     return True

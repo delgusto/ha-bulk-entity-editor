@@ -3724,6 +3724,10 @@ let v = class extends $ {
           @dialog-close=${this._onResultsClose}
           @retry-failed=${this._onRetryFailed}
         ></bee-results-dialog>
+
+        <footer class="build-info">
+          v${"0.1.0"} · built ${"2026-04-18 06:41"}
+        </footer>
       </div>
     `;
   }
@@ -3784,6 +3788,14 @@ v.styles = C`
       padding: 48px;
       text-align: center;
       color: var(--secondary-text-color, #727272);
+    }
+    .build-info {
+      margin-top: 12px;
+      font-size: 11px;
+      color: var(--secondary-text-color, #727272);
+      opacity: 0.6;
+      text-align: right;
+      font-family: var(--code-font-family, ui-monospace, monospace);
     }
   `;
 y([
