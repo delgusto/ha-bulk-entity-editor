@@ -262,22 +262,22 @@ j.elementStyles = [], j.shadowRootOptions = { mode: "open" }, j[J("elementProper
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const X = globalThis, Le = (i) => i, fe = X.trustedTypes, Te = fe ? fe.createPolicy("lit-html", { createHTML: (i) => i }) : void 0, Qe = "$lit$", k = `lit$${Math.random().toFixed(9).slice(2)}$`, et = "?" + k, xt = `<${et}>`, T = document, te = () => T.createComment(""), ie = (i) => i === null || typeof i != "object" && typeof i != "function", ze = Array.isArray, $t = (i) => ze(i) || typeof i?.[Symbol.iterator] == "function", $e = `[ 	
-\f\r]`, Y = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, Ve = /-->/g, Ne = />/g, R = RegExp(`>|${$e}(?:([^\\s"'>=/]+)(${$e}*=${$e}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`, "g"), Ue = /'/g, Be = /"/g, tt = /^(?:script|style|textarea|title)$/i, wt = (i) => (e, ...t) => ({ _$litType$: i, strings: e, values: t }), p = wt(1), M = Symbol.for("lit-noChange"), g = Symbol.for("lit-nothing"), je = /* @__PURE__ */ new WeakMap(), L = T.createTreeWalker(T, 129);
+const X = globalThis, Te = (i) => i, fe = X.trustedTypes, Le = fe ? fe.createPolicy("lit-html", { createHTML: (i) => i }) : void 0, Qe = "$lit$", k = `lit$${Math.random().toFixed(9).slice(2)}$`, et = "?" + k, xt = `<${et}>`, L = document, te = () => L.createComment(""), ie = (i) => i === null || typeof i != "object" && typeof i != "function", ze = Array.isArray, $t = (i) => ze(i) || typeof i?.[Symbol.iterator] == "function", $e = `[ 	
+\f\r]`, Z = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, Ve = /-->/g, Be = />/g, R = RegExp(`>|${$e}(?:([^\\s"'>=/]+)(${$e}*=${$e}*(?:[^ 	
+\f\r"'\`<>=]|("|')|))|$)`, "g"), Ne = /'/g, Ue = /"/g, tt = /^(?:script|style|textarea|title)$/i, wt = (i) => (e, ...t) => ({ _$litType$: i, strings: e, values: t }), p = wt(1), M = Symbol.for("lit-noChange"), g = Symbol.for("lit-nothing"), je = /* @__PURE__ */ new WeakMap(), T = L.createTreeWalker(L, 129);
 function it(i, e) {
   if (!ze(i) || !i.hasOwnProperty("raw")) throw Error("invalid template strings array");
-  return Te !== void 0 ? Te.createHTML(e) : e;
+  return Le !== void 0 ? Le.createHTML(e) : e;
 }
 const St = (i, e) => {
   const t = i.length - 1, s = [];
-  let r, o = e === 2 ? "<svg>" : e === 3 ? "<math>" : "", n = Y;
+  let r, o = e === 2 ? "<svg>" : e === 3 ? "<math>" : "", n = Z;
   for (let a = 0; a < t; a++) {
     const l = i[a];
     let h, d, c = -1, f = 0;
-    for (; f < l.length && (n.lastIndex = f, d = n.exec(l), d !== null); ) f = n.lastIndex, n === Y ? d[1] === "!--" ? n = Ve : d[1] !== void 0 ? n = Ne : d[2] !== void 0 ? (tt.test(d[2]) && (r = RegExp("</" + d[2], "g")), n = R) : d[3] !== void 0 && (n = R) : n === R ? d[0] === ">" ? (n = r ?? Y, c = -1) : d[1] === void 0 ? c = -2 : (c = n.lastIndex - d[2].length, h = d[1], n = d[3] === void 0 ? R : d[3] === '"' ? Be : Ue) : n === Be || n === Ue ? n = R : n === Ve || n === Ne ? n = Y : (n = R, r = void 0);
+    for (; f < l.length && (n.lastIndex = f, d = n.exec(l), d !== null); ) f = n.lastIndex, n === Z ? d[1] === "!--" ? n = Ve : d[1] !== void 0 ? n = Be : d[2] !== void 0 ? (tt.test(d[2]) && (r = RegExp("</" + d[2], "g")), n = R) : d[3] !== void 0 && (n = R) : n === R ? d[0] === ">" ? (n = r ?? Z, c = -1) : d[1] === void 0 ? c = -2 : (c = n.lastIndex - d[2].length, h = d[1], n = d[3] === void 0 ? R : d[3] === '"' ? Ue : Ne) : n === Ue || n === Ne ? n = R : n === Ve || n === Be ? n = Z : (n = R, r = void 0);
     const _ = n === R && i[a + 1].startsWith("/>") ? " " : "";
-    o += n === Y ? l + xt : c >= 0 ? (s.push(h), l.slice(0, c) + Qe + l.slice(c) + k + _) : l + k + (c === -2 ? a : _);
+    o += n === Z ? l + xt : c >= 0 ? (s.push(h), l.slice(0, c) + Qe + l.slice(c) + k + _) : l + k + (c === -2 ? a : _);
   }
   return [it(i, o + (i[t] || "<?>") + (e === 2 ? "</svg>" : e === 3 ? "</math>" : "")), s];
 };
@@ -287,11 +287,11 @@ class se {
     this.parts = [];
     let o = 0, n = 0;
     const a = e.length - 1, l = this.parts, [h, d] = St(e, t);
-    if (this.el = se.createElement(h, s), L.currentNode = this.el.content, t === 2 || t === 3) {
+    if (this.el = se.createElement(h, s), T.currentNode = this.el.content, t === 2 || t === 3) {
       const c = this.el.content.firstChild;
       c.replaceWith(...c.childNodes);
     }
-    for (; (r = L.nextNode()) !== null && l.length < a; ) {
+    for (; (r = T.nextNode()) !== null && l.length < a; ) {
       if (r.nodeType === 1) {
         if (r.hasAttributes()) for (const c of r.getAttributeNames()) if (c.endsWith(Qe)) {
           const f = d[n++], _ = r.getAttribute(c).split(k), b = /([.?@])?(.*)/.exec(f);
@@ -301,7 +301,7 @@ class se {
           const c = r.textContent.split(k), f = c.length - 1;
           if (f > 0) {
             r.textContent = fe ? fe.emptyScript : "";
-            for (let _ = 0; _ < f; _++) r.append(c[_], te()), L.nextNode(), l.push({ type: 2, index: ++o });
+            for (let _ = 0; _ < f; _++) r.append(c[_], te()), T.nextNode(), l.push({ type: 2, index: ++o });
             r.append(c[f], te());
           }
         }
@@ -314,7 +314,7 @@ class se {
     }
   }
   static createElement(e, t) {
-    const s = T.createElement("template");
+    const s = L.createElement("template");
     return s.innerHTML = e, s;
   }
 }
@@ -335,17 +335,17 @@ class Ct {
     return this._$AM._$AU;
   }
   u(e) {
-    const { el: { content: t }, parts: s } = this._$AD, r = (e?.creationScope ?? T).importNode(t, !0);
-    L.currentNode = r;
-    let o = L.nextNode(), n = 0, a = 0, l = s[0];
+    const { el: { content: t }, parts: s } = this._$AD, r = (e?.creationScope ?? L).importNode(t, !0);
+    T.currentNode = r;
+    let o = T.nextNode(), n = 0, a = 0, l = s[0];
     for (; l !== void 0; ) {
       if (n === l.index) {
         let h;
         l.type === 2 ? h = new F(o, o.nextSibling, this, e) : l.type === 1 ? h = new l.ctor(o, l.name, l.strings, this, e) : l.type === 6 && (h = new kt(o, this, e)), this._$AV.push(h), l = s[++a];
       }
-      n !== l?.index && (o = L.nextNode(), n++);
+      n !== l?.index && (o = T.nextNode(), n++);
     }
-    return L.currentNode = T, r;
+    return T.currentNode = L, r;
   }
   p(e) {
     let t = 0;
@@ -380,7 +380,7 @@ class F {
     this._$AH !== e && (this._$AR(), this._$AH = this.O(e));
   }
   _(e) {
-    this._$AH !== g && ie(this._$AH) ? this._$AA.nextSibling.data = e : this.T(T.createTextNode(e)), this._$AH = e;
+    this._$AH !== g && ie(this._$AH) ? this._$AA.nextSibling.data = e : this.T(L.createTextNode(e)), this._$AH = e;
   }
   $(e) {
     const { values: t, _$litType$: s } = e, r = typeof s == "number" ? this._$AC(e) : (s.el === void 0 && (s.el = se.createElement(it(s.h, s.h[0]), this.options)), s);
@@ -403,8 +403,8 @@ class F {
   }
   _$AR(e = this._$AA.nextSibling, t) {
     for (this._$AP?.(!1, !0, t); e !== this._$AB; ) {
-      const s = Le(e).nextSibling;
-      Le(e).remove(), e = s;
+      const s = Te(e).nextSibling;
+      Te(e).remove(), e = s;
     }
   }
   setConnected(e) {
@@ -578,17 +578,17 @@ const He = {
   state: "all",
   activity: "any"
 };
-function Lt(i, e) {
+function Tt(i, e) {
   return i.disabled_by ? !1 : !e.has(i.entity_id);
 }
-const Tt = (i, e) => i.area_id ? i.area_id : i.device_id ? e.get(i.device_id)?.area_id ?? null : null, st = (i) => i.split(".", 1)[0] ?? "";
+const Lt = (i, e) => i.area_id ? i.area_id : i.device_id ? e.get(i.device_id)?.area_id ?? null : null, st = (i) => i.split(".", 1)[0] ?? "";
 function Vt(i, e, t, s) {
   const r = new Map(e.map((n) => [n.id, n])), o = t.search.trim().toLowerCase();
   return i.filter((n) => {
     if (t.domain && st(n.entity_id) !== t.domain || t.integration && n.platform !== t.integration)
       return !1;
     if (t.areaId) {
-      const a = Tt(n, r);
+      const a = Lt(n, r);
       if (t.areaId === "__none__") {
         if (a) return !1;
       } else if (a !== t.areaId)
@@ -605,16 +605,16 @@ function Vt(i, e, t, s) {
         if (!n.hidden_by) return !1;
         break;
     }
-    return !(t.activity === "never_received" && (!s || !Lt(n, s)) || o && !(n.name ?? n.original_name ?? "").toLowerCase().includes(o) && !n.entity_id.toLowerCase().includes(o));
+    return !(t.activity === "never_received" && (!s || !Tt(n, s)) || o && !(n.name ?? n.original_name ?? "").toLowerCase().includes(o) && !n.entity_id.toLowerCase().includes(o));
   });
 }
-function Nt(i) {
+function Bt(i) {
   return [...new Set(i.map((e) => st(e.entity_id)))].sort();
 }
-function Ut(i) {
+function Nt(i) {
   return [...new Set(i.map((e) => e.platform))].sort();
 }
-async function Bt({
+async function Ut({
   items: i,
   idOf: e,
   run: t,
@@ -645,7 +645,7 @@ async function Bt({
   for (let d = 0; d < h; d++) a.push(l());
   return await Promise.all(a), o;
 }
-var jt = Object.defineProperty, Ht = Object.getOwnPropertyDescriptor, B = (i, e, t, s) => {
+var jt = Object.defineProperty, Ht = Object.getOwnPropertyDescriptor, U = (i, e, t, s) => {
   for (var r = s > 1 ? void 0 : s ? Ht(e, t) : e, o = i.length - 1, n; o >= 0; o--)
     (n = i[o]) && (r = (s ? n(e, t, r) : n(r)) || r);
   return s && r && jt(e, t, r), r;
@@ -815,25 +815,25 @@ z.styles = C`
       font-style: italic;
     }
   `;
-B([
+U([
   u({ attribute: !1 })
 ], z.prototype, "options", 2);
-B([
+U([
   u({ type: String })
 ], z.prototype, "value", 2);
-B([
+U([
   u({ type: String })
 ], z.prototype, "placeholder", 2);
-B([
+U([
   u({ type: Boolean })
 ], z.prototype, "disabled", 2);
-B([
+U([
   m()
 ], z.prototype, "_open", 2);
-B([
+U([
   m()
 ], z.prototype, "_menuRect", 2);
-z = B([
+z = U([
   E("bee-select")
 ], z);
 var Ft = Object.defineProperty, Wt = Object.getOwnPropertyDescriptor, ne = (i, e, t, s) => {
@@ -1073,7 +1073,7 @@ let ot = class {
  * Copyright 2020 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const { I: qt } = Pt, Fe = (i) => i, Kt = (i) => i.strings === void 0, We = () => document.createComment(""), Z = (i, e, t) => {
+const { I: qt } = Pt, Fe = (i) => i, Kt = (i) => i.strings === void 0, We = () => document.createComment(""), Y = (i, e, t) => {
   const s = i._$AA.parentNode, r = e === void 0 ? i._$AB : e._$AA;
   if (t === void 0) {
     const o = s.insertBefore(We(), r), n = s.insertBefore(We(), r);
@@ -1093,7 +1093,7 @@ const { I: qt } = Pt, Fe = (i) => i, Kt = (i) => i.strings === void 0, We = () =
     }
   }
   return t;
-}, O = (i, e, t = i) => (i._$AI(e, t), i), Gt = {}, Yt = (i, e = Gt) => i._$AH = e, Zt = (i) => i._$AH, we = (i) => {
+}, O = (i, e, t = i) => (i._$AI(e, t), i), Gt = {}, Zt = (i, e = Gt) => i._$AH = e, Yt = (i) => i._$AH, we = (i) => {
   i._$AR(), i._$AA.remove();
 };
 /**
@@ -1179,7 +1179,7 @@ const qe = (i, e, t) => {
     return this.dt(i, e, t).values;
   }
   update(i, [e, t, s]) {
-    const r = Zt(i), { values: o, keys: n } = this.dt(e, t, s);
+    const r = Yt(i), { values: o, keys: n } = this.dt(e, t, s);
     if (!Array.isArray(r)) return this.ut = n, o;
     const a = this.ut ?? (this.ut = []), l = [];
     let h, d, c = 0, f = r.length - 1, _ = 0, b = o.length - 1;
@@ -1187,26 +1187,26 @@ const qe = (i, e, t) => {
     else if (r[f] === null) f--;
     else if (a[c] === n[_]) l[_] = O(r[c], o[_]), c++, _++;
     else if (a[f] === n[b]) l[b] = O(r[f], o[b]), f--, b--;
-    else if (a[c] === n[b]) l[b] = O(r[c], o[b]), Z(i, l[b + 1], r[c]), c++, b--;
-    else if (a[f] === n[_]) l[_] = O(r[f], o[_]), Z(i, r[c], r[f]), f--, _++;
+    else if (a[c] === n[b]) l[b] = O(r[c], o[b]), Y(i, l[b + 1], r[c]), c++, b--;
+    else if (a[f] === n[_]) l[_] = O(r[f], o[_]), Y(i, r[c], r[f]), f--, _++;
     else if (h === void 0 && (h = qe(n, _, b), d = qe(a, c, f)), h.has(a[c])) if (h.has(a[f])) {
       const S = d.get(n[_]), G = S !== void 0 ? r[S] : null;
       if (G === null) {
-        const A = Z(i, r[c]);
+        const A = Y(i, r[c]);
         O(A, o[_]), l[_] = A;
-      } else l[_] = O(G, o[_]), Z(i, r[c], G), r[S] = null;
+      } else l[_] = O(G, o[_]), Y(i, r[c], G), r[S] = null;
       _++;
     } else we(r[f]), f--;
     else we(r[c]), c++;
     for (; _ <= b; ) {
-      const S = Z(i, l[b + 1]);
+      const S = Y(i, l[b + 1]);
       O(S, o[_]), l[_++] = S;
     }
     for (; c <= f; ) {
       const S = r[c++];
       S !== null && we(S);
     }
-    return this.ut = n, Yt(i, l), M;
+    return this.ut = n, Zt(i, l), M;
   }
 });
 /**
@@ -1635,7 +1635,7 @@ function de(i) {
   const e = i ? parseFloat(i) : NaN;
   return Number.isNaN(e) ? 0 : e;
 }
-function Ye(i) {
+function Ze(i) {
   if (i.assignedSlot !== null)
     return i.assignedSlot;
   if (i.parentElement !== null)
@@ -1645,9 +1645,9 @@ function Ye(i) {
 }
 function ni(i, e = !1) {
   const t = [];
-  let s = e ? i : Ye(i);
+  let s = e ? i : Ze(i);
   for (; s !== null; )
-    t.push(s), s = Ye(s);
+    t.push(s), s = Ze(s);
   return t;
 }
 function li(i, e = !1) {
@@ -2401,7 +2401,7 @@ var bi = Object.defineProperty, vi = Object.getOwnPropertyDescriptor, ae = (i, e
     (n = i[o]) && (r = (s ? n(e, t, r) : n(r)) || r);
   return s && r && bi(e, t, r), r;
 };
-let N = class extends x {
+let B = class extends x {
   constructor() {
     super(...arguments), this.open = !1, this.selected = [], this.running = !1, this._mode = "disable";
   }
@@ -2491,6 +2491,213 @@ let N = class extends x {
             ?disabled=${this.running || s === 0}
           >
             ${this.running ? "Applying…" : `${this._mode === "enable" ? "Enable" : "Disable"} ${s}`}
+          </button>
+        </div>
+      </bee-modal>
+    `;
+  }
+};
+B.styles = C`
+    .segmented {
+      display: inline-flex;
+      border: 1px solid var(--divider-color, #d0d0d0);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .segmented button {
+      font: inherit;
+      padding: 8px 16px;
+      background: var(--primary-background-color, #fff);
+      color: var(--primary-text-color, #212121);
+      border: 0;
+      cursor: pointer;
+    }
+    .segmented button + button {
+      border-left: 1px solid var(--divider-color, #d0d0d0);
+    }
+    .segmented button.on {
+      background: var(--primary-color, #03a9f4);
+      color: var(--text-primary-color, #fff);
+    }
+    .segmented button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .stats {
+      display: flex;
+      gap: 24px;
+      margin: 0 0 12px;
+    }
+    .stats div {
+      display: flex;
+      flex-direction: column;
+    }
+    .stats dt {
+      font-size: 12px;
+      color: var(--secondary-text-color, #727272);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .stats dd {
+      margin: 0;
+      font-size: 20px;
+    }
+    .stats .muted dd {
+      color: var(--secondary-text-color, #727272);
+    }
+    .warn {
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: color-mix(
+        in srgb,
+        var(--warning-color, #ff9800) 15%,
+        transparent
+      );
+      border: 1px solid
+        color-mix(in srgb, var(--warning-color, #ff9800) 50%, transparent);
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+    .note {
+      margin: 0;
+      font-size: 12px;
+      color: var(--secondary-text-color, #727272);
+    }
+    .btn {
+      font: inherit;
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--divider-color, #d0d0d0);
+      background: var(--primary-background-color, #fff);
+      color: var(--primary-text-color, #212121);
+      cursor: pointer;
+    }
+    .btn:hover:not(:disabled) {
+      background: var(--secondary-background-color, #f5f5f5);
+    }
+    .btn.primary {
+      background: var(--primary-color, #03a9f4);
+      color: var(--text-primary-color, #fff);
+      border-color: transparent;
+    }
+    .btn.primary:hover:not(:disabled) {
+      filter: brightness(0.95);
+    }
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  `;
+ae([
+  u({ type: Boolean })
+], B.prototype, "open", 2);
+ae([
+  u({ attribute: !1 })
+], B.prototype, "selected", 2);
+ae([
+  u({ type: Boolean })
+], B.prototype, "running", 2);
+ae([
+  m()
+], B.prototype, "_mode", 2);
+B = ae([
+  E("bee-enable-disable-dialog")
+], B);
+var yi = Object.defineProperty, xi = Object.getOwnPropertyDescriptor, he = (i, e, t, s) => {
+  for (var r = s > 1 ? void 0 : s ? xi(e, t) : e, o = i.length - 1, n; o >= 0; o--)
+    (n = i[o]) && (r = (s ? n(e, t, r) : n(r)) || r);
+  return s && r && yi(e, t, r), r;
+};
+let N = class extends x {
+  constructor() {
+    super(...arguments), this.open = !1, this.selected = [], this.running = !1, this._mode = "hide";
+  }
+  willUpdate(i) {
+    if (i.has("open") && this.open) {
+      const e = this.selected.filter(
+        (s) => s.hidden_by !== null
+      ).length, t = this.selected.length - e;
+      this._mode = t >= e ? "hide" : "show";
+    }
+  }
+  _close() {
+    this.dispatchEvent(
+      new CustomEvent("dialog-close", { bubbles: !0, composed: !0 })
+    );
+  }
+  _apply() {
+    this.dispatchEvent(
+      new CustomEvent("apply-show-hide", {
+        detail: this._mode,
+        bubbles: !0,
+        composed: !0
+      })
+    );
+  }
+  render() {
+    const i = this.selected.filter((o) => o.hidden_by !== null), e = this.selected.filter((o) => o.hidden_by === null), t = i.filter((o) => o.hidden_by !== "user"), s = this._mode === "show" ? i.length : e.length, r = this._mode === "show" ? e.length : i.length;
+    return p`
+      <bee-modal
+        .open=${this.open}
+        heading="Show / hide entities"
+        @modal-close=${this._close}
+      >
+        <div class="segmented" role="radiogroup">
+          <button
+            role="radio"
+            aria-checked=${this._mode === "show"}
+            class=${this._mode === "show" ? "on" : ""}
+            @click=${() => this._mode = "show"}
+            ?disabled=${this.running}
+          >
+            Show
+          </button>
+          <button
+            role="radio"
+            aria-checked=${this._mode === "hide"}
+            class=${this._mode === "hide" ? "on" : ""}
+            @click=${() => this._mode = "hide"}
+            ?disabled=${this.running}
+          >
+            Hide
+          </button>
+        </div>
+
+        <dl class="stats">
+          <div>
+            <dt>Will ${this._mode}</dt>
+            <dd><strong>${s}</strong></dd>
+          </div>
+          <div class="muted">
+            <dt>Already ${this._mode === "show" ? "shown" : "hidden"}</dt>
+            <dd>${r}</dd>
+          </div>
+        </dl>
+
+        ${this._mode === "show" && t.length > 0 ? p`
+              <div class="warn">
+                <strong>${t.length}</strong> of these were hidden
+                by their integration (not by a user). Showing them may not
+                stick.
+              </div>
+            ` : g}
+
+        <p class="note">
+          Hidden entities stay active but are excluded from default dashboards
+          and auto-generated views.
+        </p>
+
+        <div slot="footer">
+          <button class="btn" @click=${this._close} ?disabled=${this.running}>
+            Cancel
+          </button>
+          <button
+            class="btn primary"
+            @click=${this._apply}
+            ?disabled=${this.running || s === 0}
+          >
+            ${this.running ? "Applying…" : `${this._mode === "show" ? "Show" : "Hide"} ${s}`}
           </button>
         </div>
       </bee-modal>
@@ -2589,228 +2796,21 @@ N.styles = C`
       cursor: not-allowed;
     }
   `;
-ae([
+he([
   u({ type: Boolean })
 ], N.prototype, "open", 2);
-ae([
+he([
   u({ attribute: !1 })
 ], N.prototype, "selected", 2);
-ae([
+he([
   u({ type: Boolean })
 ], N.prototype, "running", 2);
-ae([
+he([
   m()
 ], N.prototype, "_mode", 2);
-N = ae([
-  E("bee-enable-disable-dialog")
-], N);
-var yi = Object.defineProperty, xi = Object.getOwnPropertyDescriptor, he = (i, e, t, s) => {
-  for (var r = s > 1 ? void 0 : s ? xi(e, t) : e, o = i.length - 1, n; o >= 0; o--)
-    (n = i[o]) && (r = (s ? n(e, t, r) : n(r)) || r);
-  return s && r && yi(e, t, r), r;
-};
-let U = class extends x {
-  constructor() {
-    super(...arguments), this.open = !1, this.selected = [], this.running = !1, this._mode = "hide";
-  }
-  willUpdate(i) {
-    if (i.has("open") && this.open) {
-      const e = this.selected.filter(
-        (s) => s.hidden_by !== null
-      ).length, t = this.selected.length - e;
-      this._mode = t >= e ? "hide" : "show";
-    }
-  }
-  _close() {
-    this.dispatchEvent(
-      new CustomEvent("dialog-close", { bubbles: !0, composed: !0 })
-    );
-  }
-  _apply() {
-    this.dispatchEvent(
-      new CustomEvent("apply-show-hide", {
-        detail: this._mode,
-        bubbles: !0,
-        composed: !0
-      })
-    );
-  }
-  render() {
-    const i = this.selected.filter((o) => o.hidden_by !== null), e = this.selected.filter((o) => o.hidden_by === null), t = i.filter((o) => o.hidden_by !== "user"), s = this._mode === "show" ? i.length : e.length, r = this._mode === "show" ? e.length : i.length;
-    return p`
-      <bee-modal
-        .open=${this.open}
-        heading="Show / hide entities"
-        @modal-close=${this._close}
-      >
-        <div class="segmented" role="radiogroup">
-          <button
-            role="radio"
-            aria-checked=${this._mode === "show"}
-            class=${this._mode === "show" ? "on" : ""}
-            @click=${() => this._mode = "show"}
-            ?disabled=${this.running}
-          >
-            Show
-          </button>
-          <button
-            role="radio"
-            aria-checked=${this._mode === "hide"}
-            class=${this._mode === "hide" ? "on" : ""}
-            @click=${() => this._mode = "hide"}
-            ?disabled=${this.running}
-          >
-            Hide
-          </button>
-        </div>
-
-        <dl class="stats">
-          <div>
-            <dt>Will ${this._mode}</dt>
-            <dd><strong>${s}</strong></dd>
-          </div>
-          <div class="muted">
-            <dt>Already ${this._mode === "show" ? "shown" : "hidden"}</dt>
-            <dd>${r}</dd>
-          </div>
-        </dl>
-
-        ${this._mode === "show" && t.length > 0 ? p`
-              <div class="warn">
-                <strong>${t.length}</strong> of these were hidden
-                by their integration (not by a user). Showing them may not
-                stick.
-              </div>
-            ` : g}
-
-        <p class="note">
-          Hidden entities stay active but are excluded from default dashboards
-          and auto-generated views.
-        </p>
-
-        <div slot="footer">
-          <button class="btn" @click=${this._close} ?disabled=${this.running}>
-            Cancel
-          </button>
-          <button
-            class="btn primary"
-            @click=${this._apply}
-            ?disabled=${this.running || s === 0}
-          >
-            ${this.running ? "Applying…" : `${this._mode === "show" ? "Show" : "Hide"} ${s}`}
-          </button>
-        </div>
-      </bee-modal>
-    `;
-  }
-};
-U.styles = C`
-    .segmented {
-      display: inline-flex;
-      border: 1px solid var(--divider-color, #d0d0d0);
-      border-radius: 8px;
-      overflow: hidden;
-      margin-bottom: 16px;
-    }
-    .segmented button {
-      font: inherit;
-      padding: 8px 16px;
-      background: var(--primary-background-color, #fff);
-      color: var(--primary-text-color, #212121);
-      border: 0;
-      cursor: pointer;
-    }
-    .segmented button + button {
-      border-left: 1px solid var(--divider-color, #d0d0d0);
-    }
-    .segmented button.on {
-      background: var(--primary-color, #03a9f4);
-      color: var(--text-primary-color, #fff);
-    }
-    .segmented button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-    .stats {
-      display: flex;
-      gap: 24px;
-      margin: 0 0 12px;
-    }
-    .stats div {
-      display: flex;
-      flex-direction: column;
-    }
-    .stats dt {
-      font-size: 12px;
-      color: var(--secondary-text-color, #727272);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-    .stats dd {
-      margin: 0;
-      font-size: 20px;
-    }
-    .stats .muted dd {
-      color: var(--secondary-text-color, #727272);
-    }
-    .warn {
-      padding: 10px 12px;
-      border-radius: 8px;
-      background: color-mix(
-        in srgb,
-        var(--warning-color, #ff9800) 15%,
-        transparent
-      );
-      border: 1px solid
-        color-mix(in srgb, var(--warning-color, #ff9800) 50%, transparent);
-      font-size: 13px;
-      margin-bottom: 12px;
-    }
-    .note {
-      margin: 0;
-      font-size: 12px;
-      color: var(--secondary-text-color, #727272);
-    }
-    .btn {
-      font: inherit;
-      padding: 8px 14px;
-      border-radius: 6px;
-      border: 1px solid var(--divider-color, #d0d0d0);
-      background: var(--primary-background-color, #fff);
-      color: var(--primary-text-color, #212121);
-      cursor: pointer;
-    }
-    .btn:hover:not(:disabled) {
-      background: var(--secondary-background-color, #f5f5f5);
-    }
-    .btn.primary {
-      background: var(--primary-color, #03a9f4);
-      color: var(--text-primary-color, #fff);
-      border-color: transparent;
-    }
-    .btn.primary:hover:not(:disabled) {
-      filter: brightness(0.95);
-    }
-    .btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-  `;
-he([
-  u({ type: Boolean })
-], U.prototype, "open", 2);
-he([
-  u({ attribute: !1 })
-], U.prototype, "selected", 2);
-he([
-  u({ type: Boolean })
-], U.prototype, "running", 2);
-he([
-  m()
-], U.prototype, "_mode", 2);
-U = he([
+N = he([
   E("bee-show-hide-dialog")
-], U);
+], N);
 const $i = /^[a-z0-9_]+\.[a-z0-9_]+$/, wi = /[.*+?^${}()|[\]\\]/g, Si = (i) => i.replace(wi, "\\$&"), Ci = (i, e) => e === "entity_id" ? i.entity_id : i.name ?? i.original_name ?? "", Ei = (i, e) => {
   if (!e.find) return i;
   if (e.regex)
@@ -3496,8 +3496,8 @@ Me([
 oe = Me([
   E("bee-results-dialog")
 ], oe);
-var Oi = Object.defineProperty, Li = Object.getOwnPropertyDescriptor, y = (i, e, t, s) => {
-  for (var r = s > 1 ? void 0 : s ? Li(e, t) : e, o = i.length - 1, n; o >= 0; o--)
+var Oi = Object.defineProperty, Ti = Object.getOwnPropertyDescriptor, y = (i, e, t, s) => {
+  for (var r = s > 1 ? void 0 : s ? Ti(e, t) : e, o = i.length - 1, n; o >= 0; o--)
     (n = i[o]) && (r = (s ? n(e, t, r) : n(r)) || r);
   return s && r && Oi(e, t, r), r;
 };
@@ -3622,7 +3622,7 @@ let v = class extends x {
       failed: 0,
       results: []
     }, this._resultsOpen = !0;
-    const t = this.hass, s = await Bt({
+    const t = this.hass, s = await Ut({
       items: e,
       idOf: (o) => o.id,
       concurrency: 8,
@@ -3653,6 +3653,19 @@ let v = class extends x {
       e.map((s) => ({ id: s, fields: t }))
     );
   }
+  _formatBuildTime() {
+    try {
+      return (/* @__PURE__ */ new Date("2026-04-18T07:32:36.257Z")).toLocaleString(void 0, {
+        year: "numeric",
+        month: "short",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+    } catch {
+      return "2026-04-18T07:32:36.257Z";
+    }
+  }
   render() {
     const i = this._filteredEntities, e = this._entities.map((t) => t.entity_id);
     return p`
@@ -3669,8 +3682,8 @@ let v = class extends x {
         <div class="card">
           <bee-filter-bar
             .filters=${this._filters}
-            .domains=${Nt(this._entities)}
-            .integrations=${Ut(this._entities)}
+            .domains=${Bt(this._entities)}
+            .integrations=${Nt(this._entities)}
             .areas=${this._areas}
             @filters-change=${this._onFiltersChange}
             @filters-reset=${this._onFiltersReset}
@@ -3739,7 +3752,7 @@ let v = class extends x {
         ></bee-results-dialog>
 
         <footer class="build-info">
-          v${"0.1.0"} · built ${"2026-04-18 07:01"}
+          v${"0.1.0"} · built ${this._formatBuildTime()}
         </footer>
       </div>
     `;
@@ -3867,7 +3880,7 @@ v = y([
  * Copyright 2021 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-class Ze {
+class Ye {
   constructor(e) {
     this._map = /* @__PURE__ */ new Map(), this._roundAverageSize = !1, this.totalSize = 0, e?.roundAverageSize === !0 && (this._roundAverageSize = !0);
   }
@@ -3897,7 +3910,7 @@ class Ze {
 function ct(i) {
   return i === "horizontal" ? "width" : "height";
 }
-class Ti {
+class Li {
   _getDefaultConfig() {
     return {
       direction: "vertical"
@@ -4142,16 +4155,16 @@ function Je(i) {
 function Vi(i) {
   return i === "horizontal" ? "marginRight" : "marginBottom";
 }
-function Ni(i) {
+function Bi(i) {
   return i === "horizontal" ? "xOffset" : "yOffset";
 }
-function Ui(i, e) {
+function Ni(i, e) {
   const t = [i, e].sort();
   return t[1] <= 0 ? Math.min(...t) : t[0] >= 0 ? Math.max(...t) : t[0] + t[1];
 }
-class Bi {
+class Ui {
   constructor() {
-    this._childSizeCache = new Ze(), this._marginSizeCache = new Ze(), this._metricsCache = /* @__PURE__ */ new Map();
+    this._childSizeCache = new Ye(), this._marginSizeCache = new Ye(), this._metricsCache = /* @__PURE__ */ new Map();
   }
   update(e, t) {
     const s = /* @__PURE__ */ new Set();
@@ -4161,7 +4174,7 @@ class Bi {
     });
     for (const r of s) {
       const o = this._metricsCache.get(r)?.[Je(t)] || 0, n = this._metricsCache.get(r - 1)?.[Vi(t)] || 0;
-      this._marginSizeCache.set(r, Ui(o, n));
+      this._marginSizeCache.set(r, Ni(o, n));
     }
   }
   get averageChildSize() {
@@ -4189,9 +4202,9 @@ class Bi {
     this._childSizeCache.clear(), this._marginSizeCache.clear(), this._metricsCache.clear();
   }
 }
-class ji extends Ti {
+class ji extends Li {
   constructor() {
-    super(...arguments), this._itemSize = { width: 100, height: 100 }, this._physicalItems = /* @__PURE__ */ new Map(), this._newPhysicalItems = /* @__PURE__ */ new Map(), this._metricsCache = new Bi(), this._anchorIdx = null, this._anchorPos = null, this._stable = !0, this._measureChildren = !0, this._estimate = !0;
+    super(...arguments), this._itemSize = { width: 100, height: 100 }, this._physicalItems = /* @__PURE__ */ new Map(), this._newPhysicalItems = /* @__PURE__ */ new Map(), this._metricsCache = new Ui(), this._anchorIdx = null, this._anchorPos = null, this._stable = !0, this._measureChildren = !0, this._estimate = !0;
   }
   // protected _defaultConfig: BaseLayoutConfig = Object.assign({}, super._defaultConfig, {
   // })
@@ -4351,7 +4364,7 @@ class ji extends Ti {
     return {
       [this._positionDim]: this._getPosition(e),
       [this._secondaryPositionDim]: 0,
-      [Ni(this.direction)]: -(this._metricsCache.getLeadingMarginValue(e, this.direction) ?? this._metricsCache.averageMarginSize)
+      [Bi(this.direction)]: -(this._metricsCache.getLeadingMarginValue(e, this.direction) ?? this._metricsCache.averageMarginSize)
     };
   }
   /**

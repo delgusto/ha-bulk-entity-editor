@@ -290,6 +290,20 @@ export class BulkEntityEditorPanel extends LitElement {
     void this._executeUpdate("rename", items);
   };
 
+  private _formatBuildTime(): string {
+    try {
+      return new Date(__BUILD_TIME__).toLocaleString(undefined, {
+        year: "numeric",
+        month: "short",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    } catch {
+      return __BUILD_TIME__;
+    }
+  }
+
   private _onRetryFailed = (e: CustomEvent<string[]>) => {
     const ids = e.detail;
     if (ids.length === 0 || !this._lastRun) return;
@@ -393,7 +407,7 @@ export class BulkEntityEditorPanel extends LitElement {
         ></bee-results-dialog>
 
         <footer class="build-info">
-          v${__BUILD_VERSION__} · built ${__BUILD_TIME__}
+          v${__BUILD_VERSION__} · built ${this._formatBuildTime()}
         </footer>
       </div>
     `;

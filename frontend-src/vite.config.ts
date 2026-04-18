@@ -12,7 +12,8 @@ const manifest = JSON.parse(
   ),
 ) as { version: string };
 
-const buildTime = new Date().toISOString().replace("T", " ").slice(0, 16);
+// Emit full ISO so the client can render it in the viewer's local timezone.
+const buildTime = new Date().toISOString();
 
 export default defineConfig({
   define: {
