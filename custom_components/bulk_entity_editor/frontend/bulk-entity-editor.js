@@ -73,7 +73,7 @@ const { is: pt, defineProperty: _t, getOwnPropertyDescriptor: ft, getOwnProperty
       }
   }
   return t;
-} }, ze = (i, e) => !pt(i, e), Le = { attribute: !0, type: String, converter: fe, reflect: !1, useDefault: !1, hasChanged: ze };
+} }, ze = (i, e) => !pt(i, e), Te = { attribute: !0, type: String, converter: fe, reflect: !1, useDefault: !1, hasChanged: ze };
 Symbol.metadata ?? (Symbol.metadata = Symbol("metadata")), P.litPropertyMetadata ?? (P.litPropertyMetadata = /* @__PURE__ */ new WeakMap());
 let H = class extends HTMLElement {
   static addInitializer(e) {
@@ -82,7 +82,7 @@ let H = class extends HTMLElement {
   static get observedAttributes() {
     return this.finalize(), this._$Eh && [...this._$Eh.keys()];
   }
-  static createProperty(e, t = Le) {
+  static createProperty(e, t = Te) {
     if (t.state && (t.attribute = !1), this._$Ei(), this.prototype.hasOwnProperty(e) && ((t = Object.create(t)).wrapped = !0), this.elementProperties.set(e, t), !t.noAccessor) {
       const s = Symbol(), r = this.getPropertyDescriptor(e, s, t);
       r !== void 0 && _t(this.prototype, e, r);
@@ -100,7 +100,7 @@ let H = class extends HTMLElement {
     }, configurable: !0, enumerable: !0 };
   }
   static getPropertyOptions(e) {
-    return this.elementProperties.get(e) ?? Le;
+    return this.elementProperties.get(e) ?? Te;
   }
   static _$Ei() {
     if (this.hasOwnProperty(Q("elementProperties"))) return;
@@ -262,7 +262,7 @@ H.elementStyles = [], H.shadowRootOptions = { mode: "open" }, H[Q("elementProper
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const ee = globalThis, Te = (i) => i, ge = ee.trustedTypes, Ve = ge ? ge.createPolicy("lit-html", { createHTML: (i) => i }) : void 0, Qe = "$lit$", k = `lit$${Math.random().toFixed(9).slice(2)}$`, et = "?" + k, xt = `<${et}>`, B = document, se = () => B.createComment(""), re = (i) => i === null || typeof i != "object" && typeof i != "function", ke = Array.isArray, wt = (i) => ke(i) || typeof i?.[Symbol.iterator] == "function", $e = `[ 	
+const ee = globalThis, Le = (i) => i, ge = ee.trustedTypes, Ve = ge ? ge.createPolicy("lit-html", { createHTML: (i) => i }) : void 0, Qe = "$lit$", k = `lit$${Math.random().toFixed(9).slice(2)}$`, et = "?" + k, xt = `<${et}>`, B = document, se = () => B.createComment(""), re = (i) => i === null || typeof i != "object" && typeof i != "function", ke = Array.isArray, wt = (i) => ke(i) || typeof i?.[Symbol.iterator] == "function", $e = `[ 	
 \f\r]`, J = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, Be = /-->/g, Ne = />/g, R = RegExp(`>|${$e}(?:([^\\s"'>=/]+)(${$e}*=${$e}*(?:[^ 	
 \f\r"'\`<>=]|("|')|))|$)`, "g"), Ue = /'/g, je = /"/g, tt = /^(?:script|style|textarea|title)$/i, $t = (i) => (e, ...t) => ({ _$litType$: i, strings: e, values: t }), p = $t(1), M = Symbol.for("lit-noChange"), g = Symbol.for("lit-nothing"), He = /* @__PURE__ */ new WeakMap(), V = B.createTreeWalker(B, 129);
 function it(i, e) {
@@ -403,8 +403,8 @@ class W {
   }
   _$AR(e = this._$AA.nextSibling, t) {
     for (this._$AP?.(!1, !0, t); e !== this._$AB; ) {
-      const s = Te(e).nextSibling;
-      Te(e).remove(), e = s;
+      const s = Le(e).nextSibling;
+      Le(e).remove(), e = s;
     }
   }
   setConnected(e) {
@@ -570,7 +570,7 @@ function u(i) {
 function m(i) {
   return u({ ...i, state: !0, attribute: !1 });
 }
-const T = {
+const L = {
   search: "",
   domain: "",
   areaId: "",
@@ -578,17 +578,17 @@ const T = {
   state: "all",
   activity: "any"
 };
-function Lt(i, e) {
+function Tt(i, e) {
   return i.disabled_by ? !1 : !e.has(i.entity_id);
 }
-const Tt = (i, e) => i.area_id ? i.area_id : i.device_id ? e.get(i.device_id)?.area_id ?? null : null, st = (i) => i.split(".", 1)[0] ?? "";
+const Lt = (i, e) => i.area_id ? i.area_id : i.device_id ? e.get(i.device_id)?.area_id ?? null : null, st = (i) => i.split(".", 1)[0] ?? "";
 function Vt(i, e, t, s) {
   const r = new Map(e.map((n) => [n.id, n])), o = t.search.trim().toLowerCase();
   return i.filter((n) => {
     if (t.domain && st(n.entity_id) !== t.domain || t.integration && n.platform !== t.integration)
       return !1;
     if (t.areaId) {
-      const a = Tt(n, r);
+      const a = Lt(n, r);
       if (t.areaId === "__none__") {
         if (a) return !1;
       } else if (a !== t.areaId)
@@ -605,7 +605,7 @@ function Vt(i, e, t, s) {
         if (!n.hidden_by) return !1;
         break;
     }
-    return !(t.activity === "never_received" && (!s || !Lt(n, s)) || o && !(n.name ?? n.original_name ?? "").toLowerCase().includes(o) && !n.entity_id.toLowerCase().includes(o));
+    return !(t.activity === "never_received" && (!s || !Tt(n, s)) || o && !(n.name ?? n.original_name ?? "").toLowerCase().includes(o) && !n.entity_id.toLowerCase().includes(o));
   });
 }
 function Bt(i) {
@@ -993,7 +993,7 @@ let I = class extends x {
   }
   _activeFilterCount() {
     let i = 0;
-    return this.filters.domain !== T.domain && (i += 1), this.filters.areaId !== T.areaId && (i += 1), this.filters.integration !== T.integration && (i += 1), this.filters.state !== T.state && (i += 1), this.filters.activity !== T.activity && (i += 1), i;
+    return this.filters.domain !== L.domain && (i += 1), this.filters.areaId !== L.areaId && (i += 1), this.filters.integration !== L.integration && (i += 1), this.filters.state !== L.state && (i += 1), this.filters.activity !== L.activity && (i += 1), i;
   }
   _renderDropdowns() {
     const i = [
@@ -1319,7 +1319,7 @@ const { I: Gt } = Pt, Fe = (i) => i, Zt = (i) => i.strings === void 0, We = () =
     }
   }
   return t;
-}, L = (i, e, t = i) => (i._$AI(e, t), i), Yt = {}, Jt = (i, e = Yt) => i._$AH = e, Xt = (i) => i._$AH, Se = (i) => {
+}, T = (i, e, t = i) => (i._$AI(e, t), i), Yt = {}, Jt = (i, e = Yt) => i._$AH = e, Xt = (i) => i._$AH, Se = (i) => {
   i._$AR(), i._$AA.remove();
 };
 /**
@@ -1411,22 +1411,22 @@ const qe = (i, e, t) => {
     let h, d, c = 0, f = r.length - 1, _ = 0, b = o.length - 1;
     for (; c <= f && _ <= b; ) if (r[c] === null) c++;
     else if (r[f] === null) f--;
-    else if (a[c] === n[_]) l[_] = L(r[c], o[_]), c++, _++;
-    else if (a[f] === n[b]) l[b] = L(r[f], o[b]), f--, b--;
-    else if (a[c] === n[b]) l[b] = L(r[c], o[b]), X(i, l[b + 1], r[c]), c++, b--;
-    else if (a[f] === n[_]) l[_] = L(r[f], o[_]), X(i, r[c], r[f]), f--, _++;
+    else if (a[c] === n[_]) l[_] = T(r[c], o[_]), c++, _++;
+    else if (a[f] === n[b]) l[b] = T(r[f], o[b]), f--, b--;
+    else if (a[c] === n[b]) l[b] = T(r[c], o[b]), X(i, l[b + 1], r[c]), c++, b--;
+    else if (a[f] === n[_]) l[_] = T(r[f], o[_]), X(i, r[c], r[f]), f--, _++;
     else if (h === void 0 && (h = qe(n, _, b), d = qe(a, c, f)), h.has(a[c])) if (h.has(a[f])) {
       const S = d.get(n[_]), Y = S !== void 0 ? r[S] : null;
       if (Y === null) {
         const A = X(i, r[c]);
-        L(A, o[_]), l[_] = A;
-      } else l[_] = L(Y, o[_]), X(i, r[c], Y), r[S] = null;
+        T(A, o[_]), l[_] = A;
+      } else l[_] = T(Y, o[_]), X(i, r[c], Y), r[S] = null;
       _++;
     } else Se(r[f]), f--;
     else Se(r[c]), c++;
     for (; _ <= b; ) {
       const S = X(i, l[b + 1]);
-      L(S, o[_]), l[_++] = S;
+      T(S, o[_]), l[_++] = S;
     }
     for (; c <= f; ) {
       const S = r[c++];
@@ -3281,6 +3281,12 @@ w.styles = C`
       display: flex;
       flex-direction: column;
       gap: 4px;
+    }
+    /* Inside a horizontal .row, fields share the width. As a direct child
+       of the flex-column .body, we must NOT set flex-basis — otherwise the
+       basis is interpreted along the column's main axis (height) and the
+       field balloons to 180px tall. */
+    .row .field {
       flex: 1 1 180px;
       min-width: 160px;
     }
@@ -3660,17 +3666,17 @@ Ie([
 le = Ie([
   E("bee-results-dialog")
 ], le);
-var Ri = Object.defineProperty, Li = Object.getOwnPropertyDescriptor, y = (i, e, t, s) => {
-  for (var r = s > 1 ? void 0 : s ? Li(e, t) : e, o = i.length - 1, n; o >= 0; o--)
+var Ri = Object.defineProperty, Ti = Object.getOwnPropertyDescriptor, y = (i, e, t, s) => {
+  for (var r = s > 1 ? void 0 : s ? Ti(e, t) : e, o = i.length - 1, n; o >= 0; o--)
     (n = i[o]) && (r = (s ? n(e, t, r) : n(r)) || r);
   return s && r && Ri(e, t, r), r;
 };
 let v = class extends x {
   constructor() {
-    super(...arguments), this.narrow = !1, this._entities = [], this._areas = [], this._devices = [], this._entityIdsWithState = /* @__PURE__ */ new Set(), this._loading = !0, this._error = null, this._filters = { ...T }, this._selection = /* @__PURE__ */ new Set(), this._activeDialog = null, this._running = !1, this._progress = null, this._resultsOpen = !1, this._lastRun = null, this._unsubscribers = [], this._onFiltersChange = (i) => {
+    super(...arguments), this.narrow = !1, this._entities = [], this._areas = [], this._devices = [], this._entityIdsWithState = /* @__PURE__ */ new Set(), this._loading = !0, this._error = null, this._filters = { ...L }, this._selection = /* @__PURE__ */ new Set(), this._activeDialog = null, this._running = !1, this._progress = null, this._resultsOpen = !1, this._lastRun = null, this._unsubscribers = [], this._onFiltersChange = (i) => {
       this._filters = { ...this._filters, ...i.detail };
     }, this._onFiltersReset = () => {
-      this._filters = { ...T };
+      this._filters = { ...L };
     }, this._onToggleEntity = (i) => {
       const e = new Set(this._selection);
       e.has(i.detail) ? e.delete(i.detail) : e.add(i.detail), this._selection = e;
@@ -3819,7 +3825,7 @@ let v = class extends x {
   }
   _formatBuildTime() {
     try {
-      return (/* @__PURE__ */ new Date("2026-04-18T22:27:12.957Z")).toLocaleString(void 0, {
+      return (/* @__PURE__ */ new Date("2026-04-18T22:40:09.188Z")).toLocaleString(void 0, {
         year: "numeric",
         month: "short",
         day: "2-digit",
@@ -3827,7 +3833,7 @@ let v = class extends x {
         minute: "2-digit"
       });
     } catch {
-      return "2026-04-18T22:27:12.957Z";
+      return "2026-04-18T22:40:09.188Z";
     }
   }
   render() {
@@ -4106,7 +4112,7 @@ class Ye {
 function ct(i) {
   return i === "horizontal" ? "width" : "height";
 }
-class Ti {
+class Li {
   _getDefaultConfig() {
     return {
       direction: "vertical"
@@ -4398,7 +4404,7 @@ class Ui {
     this._childSizeCache.clear(), this._marginSizeCache.clear(), this._metricsCache.clear();
   }
 }
-class ji extends Ti {
+class ji extends Li {
   constructor() {
     super(...arguments), this._itemSize = { width: 100, height: 100 }, this._physicalItems = /* @__PURE__ */ new Map(), this._newPhysicalItems = /* @__PURE__ */ new Map(), this._metricsCache = new Ui(), this._anchorIdx = null, this._anchorPos = null, this._stable = !0, this._measureChildren = !0, this._estimate = !0;
   }

@@ -285,6 +285,12 @@ export class BeeRenameDialog extends LitElement {
       display: flex;
       flex-direction: column;
       gap: 4px;
+    }
+    /* Inside a horizontal .row, fields share the width. As a direct child
+       of the flex-column .body, we must NOT set flex-basis — otherwise the
+       basis is interpreted along the column's main axis (height) and the
+       field balloons to 180px tall. */
+    .row .field {
       flex: 1 1 180px;
       min-width: 160px;
     }
