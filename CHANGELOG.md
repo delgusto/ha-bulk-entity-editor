@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Brand assets (icon + logo) shipped in `custom_components/bulk_entity_editor/brand/` per Home Assistant's 2026.3 brands proxy API.
+
+### Changed
+
+- Minimum Home Assistant version bumped to **2026.3.0** to support the in-repo brand assets introduced in that release.
+
+
 ## [0.1.0] - 2026-04-17
 
 Initial release.

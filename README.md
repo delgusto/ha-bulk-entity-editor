@@ -63,7 +63,7 @@ Renaming friendly names is always safe. Renaming **entity IDs** is not — Home 
 
 ## Compatibility
 
-- Home Assistant **2024.7.0** or later.
+- Home Assistant **2026.3.0** or later (required for the in-repo brand assets HA introduced in that release).
 - All frontends supported by HA (desktop browser, HA companion app, etc.). No Home Assistant Cloud required.
 - Works with both HAOS / Supervised and Container / Core installs.
 

@@ -23,6 +23,6 @@ Adds a **Bulk Editor** panel to your Home Assistant sidebar that lets you multi-
 ## Notes
 
 - Renaming entity IDs will **not** auto-update automations, scripts, dashboards, or templates that reference the old IDs. The dialog warns you before you confirm.
-- Requires Home Assistant 2024.7 or later.
+- Requires Home Assistant 2026.3 or later.
 
 [Full documentation and source on GitHub →](https://github.com/delgusto/ha-bulk-entity-editor)
