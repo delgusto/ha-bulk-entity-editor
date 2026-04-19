@@ -3828,7 +3828,7 @@ let v = class extends x {
   }
   _formatBuildTime() {
     try {
-      return (/* @__PURE__ */ new Date("2026-04-19T02:27:17.231Z")).toLocaleString(void 0, {
+      return (/* @__PURE__ */ new Date("2026-04-19T02:51:35.773Z")).toLocaleString(void 0, {
         year: "numeric",
         month: "short",
         day: "2-digit",
@@ -3836,7 +3836,7 @@ let v = class extends x {
         minute: "2-digit"
       });
     } catch {
-      return "2026-04-19T02:27:17.231Z";
+      return "2026-04-19T02:51:35.773Z";
     }
   }
   render() {
@@ -3930,7 +3930,7 @@ let v = class extends x {
         ></bee-results-dialog>
 
         <footer class="build-info">
-          v${"0.1.1"} · built ${this._formatBuildTime()}
+          v${"0.2.0"} · built ${this._formatBuildTime()}
         </footer>
       </div>
     `;
