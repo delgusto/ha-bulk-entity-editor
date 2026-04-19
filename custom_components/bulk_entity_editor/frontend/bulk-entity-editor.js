@@ -3825,7 +3825,7 @@ let v = class extends x {
   }
   _formatBuildTime() {
     try {
-      return (/* @__PURE__ */ new Date("2026-04-18T22:40:09.188Z")).toLocaleString(void 0, {
+      return (/* @__PURE__ */ new Date("2026-04-19T01:33:10.767Z")).toLocaleString(void 0, {
         year: "numeric",
         month: "short",
         day: "2-digit",
@@ -3833,7 +3833,7 @@ let v = class extends x {
         minute: "2-digit"
       });
     } catch {
-      return "2026-04-18T22:40:09.188Z";
+      return "2026-04-19T01:33:10.767Z";
     }
   }
   render() {
