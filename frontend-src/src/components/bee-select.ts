@@ -159,7 +159,8 @@ export class BeeSelect extends LitElement {
     .trigger {
       font: inherit;
       width: 100%;
-      padding: 8px 10px;
+      height: 40px;
+      padding: 0 12px;
       border-radius: 6px;
       border: 1px solid var(--divider-color, #d0d0d0);
       background: var(--primary-background-color, #fff);
@@ -170,6 +171,7 @@ export class BeeSelect extends LitElement {
       justify-content: space-between;
       gap: 8px;
       text-align: left;
+      box-sizing: border-box;
     }
     .trigger:disabled {
       opacity: 0.6;

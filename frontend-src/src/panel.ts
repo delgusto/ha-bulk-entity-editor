@@ -318,24 +318,21 @@ export class BulkEntityEditorPanel extends LitElement {
     const visible = this._filteredEntities;
     const allEntityIds = this._entities.map((e) => e.entity_id);
     return html`
-      <div class="page">
-        <header>
-          <div class="header-row">
-            <ha-menu-button
-              .hass=${this.hass}
-              .narrow=${this.narrow}
-            ></ha-menu-button>
-            <div class="title-block">
-              <h1>Bulk Entity Editor</h1>
-              <p class="subtitle">
-                ${this._loading
-                  ? "Loading…"
-                  : `${visible.length} of ${this._entities.length} entities`}
-              </p>
-            </div>
-          </div>
-        </header>
+      <div class="app-bar">
+        <ha-menu-button
+          .hass=${this.hass}
+          .narrow=${this.narrow}
+        ></ha-menu-button>
+        <div class="app-bar-title">Bulk Entity Editor</div>
+        <div class="app-bar-spacer"></div>
+        <div class="app-bar-count">
+          ${this._loading
+            ? "Loading…"
+            : `${visible.length} of ${this._entities.length}`}
+        </div>
+      </div>
 
+      <div class="page">
         ${this._error
           ? html`<div class="error">Error: ${this._error}</div>`
           : nothing}
@@ -423,69 +420,90 @@ export class BulkEntityEditorPanel extends LitElement {
 
   static styles = css`
     :host {
-      display: block;
+      display: flex;
+      flex-direction: column;
       height: 100%;
       background: var(--primary-background-color, #fafafa);
       color: var(--primary-text-color, #212121);
       font-family: var(--paper-font-body1_-_font-family, Roboto, sans-serif);
     }
-    .page {
-      padding: 24px;
-      max-width: 1400px;
-      margin: 0 auto;
-      height: 100%;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-    }
-    header {
-      margin-bottom: 16px;
-    }
-    .header-row {
+    .app-bar {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
+      height: 56px;
+      padding: 0 4px 0 4px;
+      background: var(
+        --app-header-background-color,
+        var(--primary-background-color, #fafafa)
+      );
+      color: var(
+        --app-header-text-color,
+        var(--primary-text-color, #212121)
+      );
+      border-bottom: 1px solid var(--divider-color, #e0e0e0);
+      flex: 0 0 auto;
     }
     ha-menu-button {
       flex: 0 0 auto;
-      color: var(--primary-text-color, #212121);
+      --mdc-icon-button-size: 40px;
     }
-    .title-block {
+    .app-bar-title {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 56px;
+      flex: 0 0 auto;
+      padding-left: 4px;
+    }
+    .app-bar-spacer {
       flex: 1 1 auto;
-      min-width: 0;
     }
-    h1 {
-      font-size: 24px;
-      font-weight: 500;
-      margin: 0;
-    }
-    .subtitle {
-      margin: 4px 0 0;
+    .app-bar-count {
       color: var(--secondary-text-color, #727272);
-      font-size: 14px;
+      font-size: 13px;
+      flex: 0 0 auto;
+      padding-right: 16px;
+    }
+    .page {
+      padding: 16px;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+      box-sizing: border-box;
+      flex: 1 1 auto;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
     }
     @media (max-width: 700px) {
       .page {
-        padding: 12px;
+        padding: 8px;
       }
-      h1 {
+      .app-bar-title {
         font-size: 18px;
       }
-      .subtitle {
+      .app-bar-count {
         font-size: 12px;
+        padding-right: 8px;
       }
     }
     .error {
       padding: 12px 16px;
-      border-radius: 8px;
+      border-radius: var(--ha-card-border-radius, 12px);
       background: var(--error-color, #db4437);
       color: #fff;
       margin-bottom: 16px;
     }
     .card {
-      background: var(--card-background-color, #fff);
-      border-radius: 12px;
-      box-shadow: var(--ha-card-box-shadow, 0 2px 2px rgba(0, 0, 0, 0.05));
+      background: var(--ha-card-background, var(--card-background-color, #fff));
+      border-radius: var(--ha-card-border-radius, 12px);
+      box-shadow: var(
+        --ha-card-box-shadow,
+        0 1px 3px rgba(0, 0, 0, 0.08),
+        0 1px 1px rgba(0, 0, 0, 0.05)
+      );
+      border: var(--ha-card-border-width, 1px) solid
+        var(--ha-card-border-color, var(--divider-color, #e0e0e0));
       flex: 1 1 auto;
       min-height: 0;
       display: flex;

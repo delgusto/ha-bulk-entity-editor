@@ -262,12 +262,14 @@ export class BeeFilterBar extends LitElement {
     .reset,
     .btn {
       font: inherit;
-      padding: 8px 12px;
+      padding: 0 12px;
+      height: 40px;
       border-radius: 6px;
       border: 1px solid var(--divider-color, #d0d0d0);
       background: var(--primary-background-color, #fff);
       color: var(--primary-text-color, #212121);
       cursor: pointer;
+      box-sizing: border-box;
     }
     input:focus {
       outline: 2px solid var(--primary-color, #03a9f4);

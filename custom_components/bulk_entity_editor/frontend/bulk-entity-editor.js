@@ -3,7 +3,7 @@
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const pe = globalThis, Ee = pe.ShadowRoot && (pe.ShadyCSS === void 0 || pe.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, Ae = Symbol(), De = /* @__PURE__ */ new WeakMap();
+const ue = globalThis, Ee = ue.ShadowRoot && (ue.ShadyCSS === void 0 || ue.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, Ae = Symbol(), De = /* @__PURE__ */ new WeakMap();
 let Xe = class {
   constructor(e, t, s) {
     if (this._$cssResult$ = !0, s !== Ae) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
@@ -29,10 +29,10 @@ const dt = (i) => new Xe(typeof i == "string" ? i : i + "", void 0, Ae), C = (i,
     throw Error("Value passed to 'css' function must be a 'css' function result: " + n + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
   })(r) + i[o + 1], i[0]);
   return new Xe(t, i, Ae);
-}, ut = (i, e) => {
+}, pt = (i, e) => {
   if (Ee) i.adoptedStyleSheets = e.map((t) => t instanceof CSSStyleSheet ? t : t.styleSheet);
   else for (const t of e) {
-    const s = document.createElement("style"), r = pe.litNonce;
+    const s = document.createElement("style"), r = ue.litNonce;
     r !== void 0 && s.setAttribute("nonce", r), s.textContent = t.cssText, i.appendChild(s);
   }
 }, Oe = Ee ? (i) => i : (i) => i instanceof CSSStyleSheet ? ((e) => {
@@ -45,7 +45,7 @@ const dt = (i) => new Xe(typeof i == "string" ? i : i + "", void 0, Ae), C = (i,
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const { is: pt, defineProperty: _t, getOwnPropertyDescriptor: ft, getOwnPropertyNames: gt, getOwnPropertySymbols: mt, getPrototypeOf: bt } = Object, P = globalThis, Re = P.trustedTypes, vt = Re ? Re.emptyScript : "", yt = P.reactiveElementPolyfillSupport, Q = (i, e) => i, fe = { toAttribute(i, e) {
+const { is: ut, defineProperty: _t, getOwnPropertyDescriptor: ft, getOwnPropertyNames: gt, getOwnPropertySymbols: mt, getPrototypeOf: bt } = Object, P = globalThis, Re = P.trustedTypes, vt = Re ? Re.emptyScript : "", yt = P.reactiveElementPolyfillSupport, Q = (i, e) => i, fe = { toAttribute(i, e) {
   switch (e) {
     case Boolean:
       i = i ? vt : null;
@@ -73,7 +73,7 @@ const { is: pt, defineProperty: _t, getOwnPropertyDescriptor: ft, getOwnProperty
       }
   }
   return t;
-} }, ze = (i, e) => !pt(i, e), Te = { attribute: !0, type: String, converter: fe, reflect: !1, useDefault: !1, hasChanged: ze };
+} }, ze = (i, e) => !ut(i, e), Te = { attribute: !0, type: String, converter: fe, reflect: !1, useDefault: !1, hasChanged: ze };
 Symbol.metadata ?? (Symbol.metadata = Symbol("metadata")), P.litPropertyMetadata ?? (P.litPropertyMetadata = /* @__PURE__ */ new WeakMap());
 let H = class extends HTMLElement {
   static addInitializer(e) {
@@ -156,7 +156,7 @@ let H = class extends HTMLElement {
   }
   createRenderRoot() {
     const e = this.shadowRoot ?? this.attachShadow(this.constructor.shadowRootOptions);
-    return ut(e, this.constructor.elementStyles), e;
+    return pt(e, this.constructor.elementStyles), e;
   }
   connectedCallback() {
     this.renderRoot ?? (this.renderRoot = this.createRenderRoot()), this.enableUpdating(!0), this._$EO?.forEach((e) => e.hostConnected?.());
@@ -264,7 +264,7 @@ H.elementStyles = [], H.shadowRootOptions = { mode: "open" }, H[Q("elementProper
  */
 const ee = globalThis, Le = (i) => i, ge = ee.trustedTypes, Ve = ge ? ge.createPolicy("lit-html", { createHTML: (i) => i }) : void 0, Qe = "$lit$", k = `lit$${Math.random().toFixed(9).slice(2)}$`, et = "?" + k, xt = `<${et}>`, B = document, se = () => B.createComment(""), re = (i) => i === null || typeof i != "object" && typeof i != "function", ke = Array.isArray, wt = (i) => ke(i) || typeof i?.[Symbol.iterator] == "function", $e = `[ 	
 \f\r]`, J = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, Be = /-->/g, Ne = />/g, R = RegExp(`>|${$e}(?:([^\\s"'>=/]+)(${$e}*=${$e}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`, "g"), Ue = /'/g, je = /"/g, tt = /^(?:script|style|textarea|title)$/i, $t = (i) => (e, ...t) => ({ _$litType$: i, strings: e, values: t }), p = $t(1), M = Symbol.for("lit-noChange"), g = Symbol.for("lit-nothing"), He = /* @__PURE__ */ new WeakMap(), V = B.createTreeWalker(B, 129);
+\f\r"'\`<>=]|("|')|))|$)`, "g"), Ue = /'/g, je = /"/g, tt = /^(?:script|style|textarea|title)$/i, $t = (i) => (e, ...t) => ({ _$litType$: i, strings: e, values: t }), u = $t(1), M = Symbol.for("lit-noChange"), g = Symbol.for("lit-nothing"), He = /* @__PURE__ */ new WeakMap(), V = B.createTreeWalker(B, 129);
 function it(i, e) {
   if (!ke(i) || !i.hasOwnProperty("raw")) throw Error("invalid template strings array");
   return Ve !== void 0 ? Ve.createHTML(e) : e;
@@ -556,7 +556,7 @@ const Ot = { attribute: !0, type: String, converter: fe, reflect: !1, hasChanged
   }
   throw Error("Unsupported decorator location: " + s);
 };
-function u(i) {
+function p(i) {
   return (e, t) => typeof t == "object" ? Rt(i, e, t) : ((s, r, o) => {
     const n = r.hasOwnProperty(o);
     return r.constructor.createProperty(o, s), n ? Object.getOwnPropertyDescriptor(r, o) : void 0;
@@ -568,7 +568,7 @@ function u(i) {
  * SPDX-License-Identifier: BSD-3-Clause
  */
 function m(i) {
-  return u({ ...i, state: !0, attribute: !1 });
+  return p({ ...i, state: !0, attribute: !1 });
 }
 const L = {
   search: "",
@@ -695,7 +695,7 @@ let z = class extends x {
     return i ? i.label : this.placeholder;
   }
   render() {
-    return p`
+    return u`
       <button
         type="button"
         class="trigger ${this._open ? "open" : ""}"
@@ -709,14 +709,14 @@ let z = class extends x {
         </span>
         <span class="chev" aria-hidden="true">▾</span>
       </button>
-      ${this._open && this._menuRect ? p`
+      ${this._open && this._menuRect ? u`
             <ul
               class="menu"
               role="listbox"
               style=${`top:${this._menuRect.top}px;left:${this._menuRect.left}px;min-width:${this._menuRect.width}px;`}
             >
               ${this.options.map(
-      (i) => p`
+      (i) => u`
                   <li
                     role="option"
                     aria-selected=${i.value === this.value}
@@ -727,7 +727,7 @@ let z = class extends x {
                   </li>
                 `
     )}
-              ${this.options.length === 0 ? p`<li class="empty">No options</li>` : g}
+              ${this.options.length === 0 ? u`<li class="empty">No options</li>` : g}
             </ul>
           ` : g}
     `;
@@ -742,7 +742,8 @@ z.styles = C`
     .trigger {
       font: inherit;
       width: 100%;
-      padding: 8px 10px;
+      height: 40px;
+      padding: 0 12px;
       border-radius: 6px;
       border: 1px solid var(--divider-color, #d0d0d0);
       background: var(--primary-background-color, #fff);
@@ -753,6 +754,7 @@ z.styles = C`
       justify-content: space-between;
       gap: 8px;
       text-align: left;
+      box-sizing: border-box;
     }
     .trigger:disabled {
       opacity: 0.6;
@@ -816,16 +818,16 @@ z.styles = C`
     }
   `;
 j([
-  u({ attribute: !1 })
+  p({ attribute: !1 })
 ], z.prototype, "options", 2);
 j([
-  u({ type: String })
+  p({ type: String })
 ], z.prototype, "value", 2);
 j([
-  u({ type: String })
+  p({ type: String })
 ], z.prototype, "placeholder", 2);
 j([
-  u({ type: Boolean })
+  p({ type: Boolean })
 ], z.prototype, "disabled", 2);
 j([
   m()
@@ -868,7 +870,7 @@ let ne = class extends x {
     super.disconnectedCallback(), window.removeEventListener("keydown", this._onKey);
   }
   render() {
-    return this.open ? p`
+    return this.open ? u`
       <div class="backdrop" @click=${this._onBackdrop}>
         <div
           class="dialog"
@@ -960,10 +962,10 @@ ne.styles = C`
     }
   `;
 Pe([
-  u({ type: Boolean, reflect: !0 })
+  p({ type: Boolean, reflect: !0 })
 ], ne.prototype, "open", 2);
 Pe([
-  u({ type: String })
+  p({ type: String })
 ], ne.prototype, "heading", 2);
 ne = Pe([
   E("bee-modal")
@@ -1007,7 +1009,7 @@ let I = class extends x {
       { value: "", label: "All integrations" },
       ...this.integrations.map((s) => ({ value: s, label: s }))
     ];
-    return p`
+    return u`
       <bee-select
         .value=${this.filters.domain}
         .options=${e}
@@ -1045,7 +1047,7 @@ let I = class extends x {
   }
   render() {
     const i = this.filters.search.length > 0, e = this._activeFilterCount();
-    return p`
+    return u`
       <div class="bar">
         <div class="search-wrap">
           <input
@@ -1055,7 +1057,7 @@ let I = class extends x {
             @input=${(t) => this._emit({ search: t.target.value })}
             class="search"
           />
-          ${i ? p`<button
+          ${i ? u`<button
                 type="button"
                 class="search-clear"
                 aria-label="Clear search"
@@ -1079,7 +1081,7 @@ let I = class extends x {
             <path fill="currentColor" d="M3 5h18l-7 8v6l-4-2v-4L3 5z"/>
           </svg>
           Filters
-          ${e > 0 ? p`<span class="badge">${e}</span>` : g}
+          ${e > 0 ? u`<span class="badge">${e}</span>` : g}
         </button>
 
         <button class="reset" @click=${this._reset}>Reset</button>
@@ -1196,12 +1198,14 @@ I.styles = C`
     .reset,
     .btn {
       font: inherit;
-      padding: 8px 12px;
+      padding: 0 12px;
+      height: 40px;
       border-radius: 6px;
       border: 1px solid var(--divider-color, #d0d0d0);
       background: var(--primary-background-color, #fff);
       color: var(--primary-text-color, #212121);
       cursor: pointer;
+      box-sizing: border-box;
     }
     input:focus {
       outline: 2px solid var(--primary-color, #03a9f4);
@@ -1249,16 +1253,16 @@ I.styles = C`
     }
   `;
 q([
-  u({ attribute: !1 })
+  p({ attribute: !1 })
 ], I.prototype, "filters", 2);
 q([
-  u({ attribute: !1 })
+  p({ attribute: !1 })
 ], I.prototype, "domains", 2);
 q([
-  u({ attribute: !1 })
+  p({ attribute: !1 })
 ], I.prototype, "integrations", 2);
 q([
-  u({ attribute: !1 })
+  p({ attribute: !1 })
 ], I.prototype, "areas", 2);
 q([
   m()
@@ -1851,13 +1855,13 @@ class ni {
 function li(i) {
   const e = window.getComputedStyle(i);
   return {
-    marginTop: ue(e.marginTop),
-    marginRight: ue(e.marginRight),
-    marginBottom: ue(e.marginBottom),
-    marginLeft: ue(e.marginLeft)
+    marginTop: pe(e.marginTop),
+    marginRight: pe(e.marginRight),
+    marginBottom: pe(e.marginBottom),
+    marginLeft: pe(e.marginLeft)
   };
 }
-function ue(i) {
+function pe(i) {
   const e = i ? parseFloat(i) : NaN;
   return Number.isNaN(e) ? 0 : e;
 }
@@ -1890,7 +1894,7 @@ function hi(i, e = !1) {
  * Copyright 2021 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const lt = (i) => i, at = (i, e) => p`${e}: ${JSON.stringify(i, null, 2)}`;
+const lt = (i) => i, at = (i, e) => u`${e}: ${JSON.stringify(i, null, 2)}`;
 class ci extends ii {
   constructor(e) {
     if (super(e), this._virtualizer = null, this._first = 0, this._last = -1, this._renderItem = (t, s) => at(t, s + this._first), this._keyFunction = (t, s) => lt(t, s + this._first), this._items = [], e.type !== Me.CHILD)
@@ -1953,7 +1957,7 @@ class K extends x {
   }
   render() {
     const { items: e, renderItem: t, keyFunction: s, layout: r, scroller: o } = this;
-    return p`${di({
+    return u`${di({
       items: e,
       renderItem: t,
       keyFunction: s,
@@ -1976,19 +1980,19 @@ class K extends x {
   }
 }
 ae([
-  u({ attribute: !1 })
+  p({ attribute: !1 })
 ], K.prototype, "items", void 0);
 ae([
-  u()
+  p()
 ], K.prototype, "renderItem", void 0);
 ae([
-  u()
+  p()
 ], K.prototype, "keyFunction", void 0);
 ae([
-  u({ attribute: !1 })
+  p({ attribute: !1 })
 ], K.prototype, "layout", void 0);
 ae([
-  u({ reflect: !0, type: Boolean })
+  p({ reflect: !0, type: Boolean })
 ], K.prototype, "scroller", void 0);
 /**
  * @license
@@ -1996,10 +2000,10 @@ ae([
  * SPDX-License-Identifier: BSD-3-Clause
  */
 customElements.define("lit-virtualizer", K);
-var ui = Object.defineProperty, pi = Object.getOwnPropertyDescriptor, G = (i, e, t, s) => {
-  for (var r = s > 1 ? void 0 : s ? pi(e, t) : e, o = i.length - 1, n; o >= 0; o--)
+var pi = Object.defineProperty, ui = Object.getOwnPropertyDescriptor, G = (i, e, t, s) => {
+  for (var r = s > 1 ? void 0 : s ? ui(e, t) : e, o = i.length - 1, n; o >= 0; o--)
     (n = i[o]) && (r = (s ? n(e, t, r) : n(r)) || r);
-  return s && r && ui(e, t, r), r;
+  return s && r && pi(e, t, r), r;
 };
 let D = class extends x {
   constructor() {
@@ -2047,7 +2051,7 @@ let D = class extends x {
   }
   render() {
     const i = this._allVisibleSelected();
-    return p`
+    return u`
       <div class="grid">
         <div class="head row">
           <div class="cell cell-check">
@@ -2076,7 +2080,7 @@ let D = class extends x {
         e.disabled_by ? "is-disabled" : "",
         e.hidden_by ? "is-hidden" : ""
       ].filter(Boolean).join(" "), o = this._stateLabel(e), n = this._stateClass(e);
-      return p`
+      return u`
               <div
                 class=${r}
                 @click=${() => this._toggle(e.entity_id)}
@@ -2260,19 +2264,19 @@ D.styles = C`
     }
   `;
 G([
-  u({ attribute: !1 })
+  p({ attribute: !1 })
 ], D.prototype, "entities", 2);
 G([
-  u({ attribute: !1 })
+  p({ attribute: !1 })
 ], D.prototype, "areas", 2);
 G([
-  u({ attribute: !1 })
+  p({ attribute: !1 })
 ], D.prototype, "devices", 2);
 G([
-  u({ attribute: !1 })
+  p({ attribute: !1 })
 ], D.prototype, "selection", 2);
 G([
-  u({ attribute: !1 })
+  p({ attribute: !1 })
 ], D.prototype, "entityIdsWithState", 2);
 D = G([
   E("bee-entity-table")
@@ -2301,7 +2305,7 @@ let be = class extends x {
     );
   }
   render() {
-    return this.count === 0 ? null : p`
+    return this.count === 0 ? null : u`
       <div class="bar" role="toolbar" aria-label="Bulk actions">
         <div class="count">
           <span><strong>${this.count}</strong> selected</span>
@@ -2411,7 +2415,7 @@ be.styles = C`
     }
   `;
 ht([
-  u({ type: Number })
+  p({ type: Number })
 ], be.prototype, "count", 2);
 be = ht([
   E("bee-action-bar")
@@ -2443,7 +2447,7 @@ let O = class extends x {
     );
   }
   render() {
-    return p`
+    return u`
       <bee-modal
         .open=${this.open}
         heading="Change area"
@@ -2540,16 +2544,16 @@ O.styles = C`
     }
   `;
 Z([
-  u({ type: Boolean })
+  p({ type: Boolean })
 ], O.prototype, "open", 2);
 Z([
-  u({ attribute: !1 })
+  p({ attribute: !1 })
 ], O.prototype, "areas", 2);
 Z([
-  u({ type: Number })
+  p({ type: Number })
 ], O.prototype, "count", 2);
 Z([
-  u({ type: Boolean })
+  p({ type: Boolean })
 ], O.prototype, "running", 2);
 Z([
   m()
@@ -2590,7 +2594,7 @@ let N = class extends x {
   }
   render() {
     const i = this.selected.filter((o) => o.disabled_by !== null), e = this.selected.filter((o) => o.disabled_by === null), t = i.filter((o) => o.disabled_by !== "user"), s = this._mode === "enable" ? i.length : e.length, r = this._mode === "enable" ? e.length : i.length;
-    return p`
+    return u`
       <bee-modal
         .open=${this.open}
         heading="Enable / disable entities"
@@ -2628,7 +2632,7 @@ let N = class extends x {
           </div>
         </dl>
 
-        ${this._mode === "enable" && t.length > 0 ? p`
+        ${this._mode === "enable" && t.length > 0 ? u`
               <div class="warn">
                 <strong>${t.length}</strong> of these were
                 disabled by their integration or device (not by a user).
@@ -2751,13 +2755,13 @@ N.styles = C`
     }
   `;
 he([
-  u({ type: Boolean })
+  p({ type: Boolean })
 ], N.prototype, "open", 2);
 he([
-  u({ attribute: !1 })
+  p({ attribute: !1 })
 ], N.prototype, "selected", 2);
 he([
-  u({ type: Boolean })
+  p({ type: Boolean })
 ], N.prototype, "running", 2);
 he([
   m()
@@ -2798,7 +2802,7 @@ let U = class extends x {
   }
   render() {
     const i = this.selected.filter((o) => o.hidden_by !== null), e = this.selected.filter((o) => o.hidden_by === null), t = i.filter((o) => o.hidden_by !== "user"), s = this._mode === "show" ? i.length : e.length, r = this._mode === "show" ? e.length : i.length;
-    return p`
+    return u`
       <bee-modal
         .open=${this.open}
         heading="Show / hide entities"
@@ -2836,7 +2840,7 @@ let U = class extends x {
           </div>
         </dl>
 
-        ${this._mode === "show" && t.length > 0 ? p`
+        ${this._mode === "show" && t.length > 0 ? u`
               <div class="warn">
                 <strong>${t.length}</strong> of these were hidden
                 by their integration (not by a user). Showing them may not
@@ -2958,13 +2962,13 @@ U.styles = C`
     }
   `;
 ce([
-  u({ type: Boolean })
+  p({ type: Boolean })
 ], U.prototype, "open", 2);
 ce([
-  u({ attribute: !1 })
+  p({ attribute: !1 })
 ], U.prototype, "selected", 2);
 ce([
-  u({ type: Boolean })
+  p({ type: Boolean })
 ], U.prototype, "running", 2);
 ce([
   m()
@@ -3108,7 +3112,7 @@ let w = class extends x {
   }
   render() {
     const i = this._rows, e = Pi(i), t = i.some((r) => r.error !== null), s = this.running || e.applicable === 0 || t;
-    return p`
+    return u`
       <bee-modal
         .open=${this.open}
         heading="Rename entities"
@@ -3144,7 +3148,7 @@ let w = class extends x {
             </label>
           </div>
 
-          ${this._target === "entity_id" ? p`
+          ${this._target === "entity_id" ? u`
                 <div class="warn">
                   <strong>Renaming entity IDs is risky.</strong> Home
                   Assistant will not automatically update automations,
@@ -3153,7 +3157,7 @@ let w = class extends x {
                 </div>
               ` : g}
 
-          ${this._mode === "prefix" || this._mode === "suffix" ? p`
+          ${this._mode === "prefix" || this._mode === "suffix" ? u`
                 <label class="field">
                   <span
                     >${this._mode === "prefix" ? "Prefix text" : "Suffix text"}</span
@@ -3166,7 +3170,7 @@ let w = class extends x {
                     ?disabled=${this.running}
                   />
                 </label>
-              ` : p`
+              ` : u`
                 <div class="row">
                   <label class="field">
                     <span>Find</span>
@@ -3230,14 +3234,14 @@ let w = class extends x {
               <lit-virtualizer
                 scroller
                 .items=${i}
-                .renderItem=${(r) => p`
+                .renderItem=${(r) => u`
                   <div
                     class="preview-row ${r.error ? "has-error" : r.changed ? "will-change" : "unchanged"}"
                   >
                     <div class="old">${r.currentValue || "—"}</div>
                     <div class="arrow">→</div>
                     <div class="new">${r.newValue || "—"}</div>
-                    ${r.error ? p`<div class="err-msg">${r.error}</div>` : r.changed ? g : p`<div class="unchanged-msg">no change</div>`}
+                    ${r.error ? u`<div class="err-msg">${r.error}</div>` : r.changed ? g : u`<div class="unchanged-msg">no change</div>`}
                   </div>
                 `}
               ></lit-virtualizer>
@@ -3449,16 +3453,16 @@ w.styles = C`
     }
   `;
 $([
-  u({ type: Boolean })
+  p({ type: Boolean })
 ], w.prototype, "open", 2);
 $([
-  u({ attribute: !1 })
+  p({ attribute: !1 })
 ], w.prototype, "selected", 2);
 $([
-  u({ attribute: !1 })
+  p({ attribute: !1 })
 ], w.prototype, "allEntityIds", 2);
 $([
-  u({ type: Boolean })
+  p({ type: Boolean })
 ], w.prototype, "running", 2);
 $([
   m()
@@ -3511,17 +3515,17 @@ let le = class extends x {
   }
   render() {
     const i = this.progress, e = i != null && i.done < i.total, t = i != null && i.failed > 0;
-    return p`
+    return u`
       <bee-modal
         .open=${this.open}
         heading=${e ? "Applying…" : "Done"}
         @modal-close=${this._close}
       >
-        ${i ? p`
+        ${i ? u`
               <div class="summary">
                 <div class="counts">
                   <span class="ok">${i.succeeded} succeeded</span>
-                  ${i.failed > 0 ? p`<span class="err">${i.failed} failed</span>` : g}
+                  ${i.failed > 0 ? u`<span class="err">${i.failed} failed</span>` : g}
                   <span class="total">of ${i.total}</span>
                 </div>
                 <div class="bar">
@@ -3532,12 +3536,12 @@ let le = class extends x {
                 </div>
               </div>
 
-              ${t ? p`
+              ${t ? u`
                     <details open>
                       <summary>Failures</summary>
                       <ul class="failures">
                         ${i.results.filter((s) => !s.ok).map(
-      (s) => p`
+      (s) => u`
                               <li>
                                 <code>${s.id}</code>
                                 <span class="msg">${s.error}</span>
@@ -3550,7 +3554,7 @@ let le = class extends x {
             ` : g}
 
         <div slot="footer">
-          ${t && !e ? p`
+          ${t && !e ? u`
                 <button class="btn" @click=${this._retryFailed}>
                   Retry failed
                 </button>
@@ -3658,10 +3662,10 @@ le.styles = C`
     }
   `;
 Ie([
-  u({ type: Boolean })
+  p({ type: Boolean })
 ], le.prototype, "open", 2);
 Ie([
-  u({ attribute: !1 })
+  p({ attribute: !1 })
 ], le.prototype, "progress", 2);
 le = Ie([
   E("bee-results-dialog")
@@ -3825,7 +3829,7 @@ let v = class extends x {
   }
   _formatBuildTime() {
     try {
-      return (/* @__PURE__ */ new Date("2026-04-19T01:33:10.767Z")).toLocaleString(void 0, {
+      return (/* @__PURE__ */ new Date("2026-04-19T01:41:46.138Z")).toLocaleString(void 0, {
         year: "numeric",
         month: "short",
         day: "2-digit",
@@ -3833,29 +3837,26 @@ let v = class extends x {
         minute: "2-digit"
       });
     } catch {
-      return "2026-04-19T01:33:10.767Z";
+      return "2026-04-19T01:41:46.138Z";
     }
   }
   render() {
     const i = this._filteredEntities, e = this._entities.map((t) => t.entity_id);
-    return p`
-      <div class="page">
-        <header>
-          <div class="header-row">
-            <ha-menu-button
-              .hass=${this.hass}
-              .narrow=${this.narrow}
-            ></ha-menu-button>
-            <div class="title-block">
-              <h1>Bulk Entity Editor</h1>
-              <p class="subtitle">
-                ${this._loading ? "Loading…" : `${i.length} of ${this._entities.length} entities`}
-              </p>
-            </div>
-          </div>
-        </header>
+    return u`
+      <div class="app-bar">
+        <ha-menu-button
+          .hass=${this.hass}
+          .narrow=${this.narrow}
+        ></ha-menu-button>
+        <div class="app-bar-title">Bulk Entity Editor</div>
+        <div class="app-bar-spacer"></div>
+        <div class="app-bar-count">
+          ${this._loading ? "Loading…" : `${i.length} of ${this._entities.length}`}
+        </div>
+      </div>
 
-        ${this._error ? p`<div class="error">Error: ${this._error}</div>` : g}
+      <div class="page">
+        ${this._error ? u`<div class="error">Error: ${this._error}</div>` : g}
 
         <div class="card">
           <bee-filter-bar
@@ -3868,7 +3869,7 @@ let v = class extends x {
           ></bee-filter-bar>
 
           <div class="table-host">
-            ${this._loading ? p`<div class="loading">Loading entities…</div>` : p`
+            ${this._loading ? u`<div class="loading">Loading entities…</div>` : u`
                   <bee-entity-table
                     .entities=${i}
                     .areas=${this._areas}
@@ -3938,69 +3939,90 @@ let v = class extends x {
 };
 v.styles = C`
     :host {
-      display: block;
+      display: flex;
+      flex-direction: column;
       height: 100%;
       background: var(--primary-background-color, #fafafa);
       color: var(--primary-text-color, #212121);
       font-family: var(--paper-font-body1_-_font-family, Roboto, sans-serif);
     }
-    .page {
-      padding: 24px;
-      max-width: 1400px;
-      margin: 0 auto;
-      height: 100%;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-    }
-    header {
-      margin-bottom: 16px;
-    }
-    .header-row {
+    .app-bar {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
+      height: 56px;
+      padding: 0 4px 0 4px;
+      background: var(
+        --app-header-background-color,
+        var(--primary-background-color, #fafafa)
+      );
+      color: var(
+        --app-header-text-color,
+        var(--primary-text-color, #212121)
+      );
+      border-bottom: 1px solid var(--divider-color, #e0e0e0);
+      flex: 0 0 auto;
     }
     ha-menu-button {
       flex: 0 0 auto;
-      color: var(--primary-text-color, #212121);
+      --mdc-icon-button-size: 40px;
     }
-    .title-block {
+    .app-bar-title {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 56px;
+      flex: 0 0 auto;
+      padding-left: 4px;
+    }
+    .app-bar-spacer {
       flex: 1 1 auto;
-      min-width: 0;
     }
-    h1 {
-      font-size: 24px;
-      font-weight: 500;
-      margin: 0;
-    }
-    .subtitle {
-      margin: 4px 0 0;
+    .app-bar-count {
       color: var(--secondary-text-color, #727272);
-      font-size: 14px;
+      font-size: 13px;
+      flex: 0 0 auto;
+      padding-right: 16px;
+    }
+    .page {
+      padding: 16px;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+      box-sizing: border-box;
+      flex: 1 1 auto;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
     }
     @media (max-width: 700px) {
       .page {
-        padding: 12px;
+        padding: 8px;
       }
-      h1 {
+      .app-bar-title {
         font-size: 18px;
       }
-      .subtitle {
+      .app-bar-count {
         font-size: 12px;
+        padding-right: 8px;
       }
     }
     .error {
       padding: 12px 16px;
-      border-radius: 8px;
+      border-radius: var(--ha-card-border-radius, 12px);
       background: var(--error-color, #db4437);
       color: #fff;
       margin-bottom: 16px;
     }
     .card {
-      background: var(--card-background-color, #fff);
-      border-radius: 12px;
-      box-shadow: var(--ha-card-box-shadow, 0 2px 2px rgba(0, 0, 0, 0.05));
+      background: var(--ha-card-background, var(--card-background-color, #fff));
+      border-radius: var(--ha-card-border-radius, 12px);
+      box-shadow: var(
+        --ha-card-box-shadow,
+        0 1px 3px rgba(0, 0, 0, 0.08),
+        0 1px 1px rgba(0, 0, 0, 0.05)
+      );
+      border: var(--ha-card-border-width, 1px) solid
+        var(--ha-card-border-color, var(--divider-color, #e0e0e0));
       flex: 1 1 auto;
       min-height: 0;
       display: flex;
@@ -4027,16 +4049,16 @@ v.styles = C`
     }
   `;
 y([
-  u({ attribute: !1 })
+  p({ attribute: !1 })
 ], v.prototype, "hass", 2);
 y([
-  u({ attribute: !1 })
+  p({ attribute: !1 })
 ], v.prototype, "narrow", 2);
 y([
-  u({ attribute: !1 })
+  p({ attribute: !1 })
 ], v.prototype, "route", 2);
 y([
-  u({ attribute: !1 })
+  p({ attribute: !1 })
 ], v.prototype, "panel", 2);
 y([
   m()
