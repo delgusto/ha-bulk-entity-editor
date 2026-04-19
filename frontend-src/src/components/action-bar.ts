@@ -108,7 +108,7 @@ export class BeeActionBar extends LitElement {
       opacity: 0.5;
       cursor: not-allowed;
     }
-    @media (max-width: 1024px) {
+    @media (max-width: 1439px) {
       .bar {
         padding: 10px 12px;
         gap: 10px;

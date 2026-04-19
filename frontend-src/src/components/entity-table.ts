@@ -251,7 +251,7 @@ export class BeeEntityTable extends LitElement {
       text-overflow: ellipsis;
       margin-top: 2px;
     }
-    @media (max-width: 1024px) {
+    @media (max-width: 1439px) {
       .hide-on-narrow {
         display: none !important;
       }

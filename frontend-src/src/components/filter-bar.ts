@@ -189,7 +189,7 @@ export class BeeFilterBar extends LitElement {
       background: var(--card-background-color, #fff);
       border-radius: 12px 12px 0 0;
       border-bottom: 1px solid var(--divider-color, #e0e0e0);
-      align-items: center;
+      align-items: flex-start;
     }
     .search-wrap {
       position: relative;
@@ -231,13 +231,12 @@ export class BeeFilterBar extends LitElement {
     }
     .inline-filters {
       display: flex;
-      flex-wrap: wrap;
       gap: 8px;
       flex: 1 1 auto;
     }
     .inline-filters > bee-select {
-      flex: 0 1 160px;
-      min-width: 140px;
+      flex: 1 1 140px;
+      min-width: 120px;
     }
     .filters-button {
       display: none;
@@ -297,10 +296,10 @@ export class BeeFilterBar extends LitElement {
       flex-direction: column;
       gap: 12px;
     }
-    /* 1024px covers iPads in landscape and narrow laptop windows — below
-       that, there isn't room for search + 5 dropdowns + reset in one row,
-       so we collapse to the Filters button pattern. */
-    @media (max-width: 1024px) {
+    /* Only show the full inline filter row on very wide desktops — below
+       1440px the HA sidebar plus 5 dropdowns plus search crowds things and
+       the filters wrap awkwardly, so collapse to the Filters button. */
+    @media (max-width: 1439px) {
       .bar {
         padding: 10px 12px;
       }
